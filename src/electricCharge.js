@@ -31,11 +31,12 @@ export default function createElectricCharge(args) {
   const chargeInputNode = document.createElement('div');
   chargeInputNode.classList.add('charge-input', 'hidden');
 
-  node.addEventListener('click', () => {
+  node.addEventListener('click', (event) => {
+
     const hasDragged = node.getAttribute('has-dragged');
     if (hasDragged !== null) {
       node.removeAttribute('has-dragged');
-    } else {
+    } else if (event.target !== chargeInputNode) {
       chargeInputNode.classList.toggle('hidden');
     }
   });
