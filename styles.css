@@ -22,6 +22,7 @@ body {
   border-radius: 20px;
   background: red;
   transform: translate(-20px, -20px);
+  cursor: pointer;
 }
 
 .test-charge {
@@ -31,4 +32,16 @@ body {
 .dragging {
   cursor: move;
   background: green;
+}
+
+.charge-input {
+  width: 150px;
+  height: 30px;
+  margin-left: 45px;
+  margin-top: 5px;
+  background-color: cornflowerblue;
+}
+
+.hidden {
+  display: none;
 }

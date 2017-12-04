@@ -24,10 +24,23 @@ export default function createElectricCharge(args) {
   };
 
   const node = document.createElement('div');
+  node.className = `charge${isTest ? ' test-charge' : ''}`;
 
   setNodePosition();
 
-  node.className = `charge${isTest ? ' test-charge' : ''}`;
+  const chargeInputNode = document.createElement('div');
+  chargeInputNode.classList.add('charge-input', 'hidden');
+
+  node.addEventListener('click', () => {
+    const hasDragged = node.getAttribute('has-dragged');
+    if (hasDragged !== null) {
+      node.removeAttribute('has-dragged');
+    } else {
+      chargeInputNode.classList.toggle('hidden');
+    }
+  });
+
+  node.appendChild(chargeInputNode);
 
   parentDOMNode.appendChild(node);
 
