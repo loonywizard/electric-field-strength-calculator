@@ -16,9 +16,4 @@ const testCharge = createElectricCharge({
   isTest: true,
 });
 
-const draggingItems = [
-  ...charges.map(charge => charge.getDOMNode()),
-  testCharge.getDOMNode(),
-];
-
-const dndController = createDnDController(draggingItems);
+const dndController = createDnDController([...charges, testCharge]);

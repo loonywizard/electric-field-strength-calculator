@@ -9,7 +9,8 @@ export default function createDnDController(draggableItems) {
   let hasDraggingStarted = false;
 
   const addMouseDownListenerToItem = (item) => {
-    item.addEventListener('mousedown', () => {
+    const node = item.getDOMNode();
+    node.addEventListener('mousedown', () => {
       draggingItem = item;
       isMouseDown = true;
     });
@@ -21,14 +22,16 @@ export default function createDnDController(draggableItems) {
   };
 
   function handleStartDragging(event) {
-    draggingItem.classList.add('dragging');
+    const node = draggingItem.getDOMNode();
 
-    mouseOffsetX = event.pageX - draggingItem.getBoundingClientRect().left;
-    mouseOffsetY = event.pageY - draggingItem.getBoundingClientRect().top;
+    node.classList.add('dragging');
+
+    mouseOffsetX = event.pageX - node.getBoundingClientRect().left;
+    mouseOffsetY = event.pageY - node.getBoundingClientRect().top;
   }
 
   function handleStopDragging() {
-    draggingItem.classList.remove('dragging');
+    draggingItem.getDOMNode().classList.remove('dragging');
 
     isMouseDown = false;
     isDragging = false;
@@ -44,8 +47,10 @@ export default function createDnDController(draggableItems) {
       hasDraggingStarted = true;
     }
 
-    draggingItem.style.top = event.pageY - mouseOffsetY +20 +'px';
-    draggingItem.style.left = event.pageX - mouseOffsetX +20 + 'px';
+    draggingItem.setPosition({
+      x: event.pageX - mouseOffsetX + 20,
+      y: event.pageY - mouseOffsetY + 20,
+    })
   }
 
   items.forEach(item => {
