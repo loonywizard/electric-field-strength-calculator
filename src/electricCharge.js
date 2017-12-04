@@ -9,6 +9,7 @@ export default function createElectricCharge(args) {
 
   const getPosition = () => ({ ...position });
   const getCharge = () => charge;
+  const getDOMNode = () => node;
 
   const node = document.createElement('div');
 
@@ -22,5 +23,6 @@ export default function createElectricCharge(args) {
   return {
     getPosition,
     getCharge,
+    getDOMNode,
   };
 }

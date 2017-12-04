@@ -1,4 +1,5 @@
 import createElectricCharge from './electricCharge';
+import createDnDController from './dndController';
 
 const container = document.getElementById('container');
 
@@ -14,3 +15,10 @@ const testCharge = createElectricCharge({
   charge: 10,
   isTest: true,
 });
+
+const draggingItems = [
+  ...charges.map(charge => charge.getDOMNode()),
+  testCharge.getDOMNode(),
+];
+
+const dndController = createDnDController(draggingItems);

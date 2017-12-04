@@ -21,9 +21,14 @@ body {
   height: 40px;
   border-radius: 20px;
   background: red;
-  transform: translate(-20px);
+  transform: translate(-20px, -20px);
 }
 
 .test-charge {
   background: black;
+}
+
+.dragging {
+  cursor: move;
+  background: green;
 }
