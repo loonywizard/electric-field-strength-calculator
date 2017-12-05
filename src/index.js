@@ -24,9 +24,24 @@ setCanvasSize();
 screenSizeController.subscribe(setCanvasSize);
 
 const charges = [
-  createElectricCharge({ position: { x: 40, y: 140}, parentDOMNode: container, charge: 10 }),
-  createElectricCharge({ position: { x: 200, y: 140}, parentDOMNode: container, charge: 10 }),
-  createElectricCharge({ position: { x: 100, y: 250}, parentDOMNode: container, charge: 10 }),
+  createElectricCharge({
+    position: { x: 40, y: 140 },
+    parentDOMNode: container,
+    charge: 10,
+    onChargeInput: calcAndDisplayEfs,
+  }),
+  createElectricCharge({
+    position: { x: 200, y: 140 },
+    parentDOMNode: container,
+    charge: 10,
+    onChargeInput: calcAndDisplayEfs,
+  }),
+  createElectricCharge({
+    position: { x: 100, y: 250 },
+    parentDOMNode: container,
+    charge: 10,
+    onChargeInput: calcAndDisplayEfs,
+  }),
 ];
 
 const testCharge = createElectricCharge({
@@ -34,11 +49,12 @@ const testCharge = createElectricCharge({
   parentDOMNode: container,
   charge: 10,
   isTest: true,
+  onChargeInput: calcAndDisplayEfs,
 });
 
 const efsCalculator = createEFSCalculator(charges, testCharge);
 
-const calcAndDisplayEfs = () => {
+function calcAndDisplayEfs() {
   const { efs, angle } = efsCalculator.calculate();
   const testChargePosition = testCharge.getPosition();
   ctx.clearRect(0, 0, canvas.width, canvas.height);

@@ -2,6 +2,7 @@ export default function createElectricCharge(args) {
   const {
     isTest = false,
     parentDOMNode,
+    onChargeInput,
   } = args;
 
   let {
@@ -35,6 +36,7 @@ export default function createElectricCharge(args) {
   
   chargeInputNode.addEventListener('input', () => {
     charge = chargeInputNode.value;
+    onChargeInput();
   });
 
   node.addEventListener('click', (event) => {
