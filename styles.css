@@ -35,11 +35,10 @@ body {
 }
 
 .charge-input {
-  width: 150px;
+  width: 190px;
   height: 30px;
   margin-left: 45px;
   margin-top: 5px;
-  background-color: cornflowerblue;
 }
 
 .hidden {

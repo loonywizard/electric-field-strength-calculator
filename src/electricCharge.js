@@ -13,7 +13,7 @@ export default function createElectricCharge(args) {
     node.style.top = `${position.y}px`;
     node.style.left = `${position.x}px`;
   }
-
+  
   const getPosition = () => ({ ...position });
   const getCharge = () => charge;
   const getDOMNode = () => node;
@@ -28,8 +28,14 @@ export default function createElectricCharge(args) {
 
   setNodePosition();
 
-  const chargeInputNode = document.createElement('div');
+  const chargeInputNode = document.createElement('input');
   chargeInputNode.classList.add('charge-input', 'hidden');
+  chargeInputNode.setAttribute('type', 'number');
+  chargeInputNode.value = charge;
+  
+  chargeInputNode.addEventListener('input', () => {
+    charge = chargeInputNode.value;
+  });
 
   node.addEventListener('click', (event) => {
 
