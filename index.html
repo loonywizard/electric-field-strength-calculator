@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
   </head>
   <body>
   <canvas
@@ -10,6 +11,10 @@
   >YOUR BROWSER DOESN'T SUPPORT HTML5 CANVAS TAG!</canvas>
   <div id="container" class="container">
     <div id="efs-display" class="efs-display"></div>
+    <div id="dielectric-constant-container" class="dielectric-constant-container">
+      Диэлектрическая проницаемость среды:
+      <input type="number" id="dielectric-constant-input" min="0" value="1">
+    </div>
   </div>
   <script src="dist/bundle.js"></script>
   </body>

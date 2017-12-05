@@ -6,11 +6,13 @@
 * EFS From all field is sum of all vectors of efs
 * */
 
+// TODO: rename efc to efs everywhere!!
 const k = 9 * 10 ** 9;
 
-export default function createEFSCalculator(charges, testCharge) {
+export default function createEFSCalculator(charges, testCharge, dielectricConstantController) {
   const calculate = () => {
     const testChargePosition = testCharge.getPosition();
+    const dielectricConstant = dielectricConstantController.getDielectricConstant();
 
     let xEfs = 0;
     let yEfs = 0;
@@ -27,7 +29,7 @@ export default function createEFSCalculator(charges, testCharge) {
       yEfs += chargeEfs * Math.sin(chargeAngle);
     });
 
-    const efs = (xEfs ** 2 + yEfs ** 2) ** 0.5;
+    const efs = (xEfs ** 2 + yEfs ** 2) ** 0.5 / dielectricConstant;
 
     const angle = Math.atan2(yEfs, xEfs);
 

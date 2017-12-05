@@ -2,6 +2,9 @@ import createElectricCharge from './electricCharge';
 import createDnDController from './dndController';
 import createEFSCalculator from './efcCalculator';
 import createScreenSizeController from './screenSizeController';
+import createDielectricConstantController from './dielectricConstantController';
+
+const dielectricConstantController = createDielectricConstantController();
 
 const container = document.getElementById('container');
 
@@ -52,7 +55,7 @@ const testCharge = createElectricCharge({
   onChargeInput: calcAndDisplayEfs,
 });
 
-const efsCalculator = createEFSCalculator(charges, testCharge);
+const efsCalculator = createEFSCalculator(charges, testCharge, dielectricConstantController);
 
 function calcAndDisplayEfs() {
   const { efs, angle } = efsCalculator.calculate();
@@ -64,7 +67,9 @@ function calcAndDisplayEfs() {
   ctx.lineTo(testChargePosition.x + 100 * Math.cos(angle), testChargePosition.y + 100 * Math.sin(angle));
   ctx.stroke();
   efsDisplay.innerHTML = `${efs} В/м`;
-};
+}
+
+dielectricConstantController.subscribe(calcAndDisplayEfs);
 
 calcAndDisplayEfs();
 
