@@ -3,6 +3,21 @@ import createDnDController from './dndController';
 import createEFSCalculator from './efcCalculator';
 import createScreenSizeController from './screenSizeController';
 import createDielectricConstantController from './dielectricConstantController';
+import createNewChargeCreator from './newChargeCreator';
+
+const createChargeCallback = (chargeValue) => {
+  const charge = createElectricCharge({
+    position: { x: 400, y: 400 },
+    parentDOMNode: container,
+    charge: chargeValue,
+    onChargeInput: calcAndDisplayEfs,
+  });
+  charges.push(charge);
+  dndController.addItem(charge);
+  calcAndDisplayEfs();
+};
+
+const chargesCreator = createNewChargeCreator(createChargeCallback);
 
 const dielectricConstantController = createDielectricConstantController();
 
@@ -28,18 +43,6 @@ screenSizeController.subscribe(setCanvasSize);
 
 const charges = [
   createElectricCharge({
-    position: { x: 40, y: 140 },
-    parentDOMNode: container,
-    charge: 10,
-    onChargeInput: calcAndDisplayEfs,
-  }),
-  createElectricCharge({
-    position: { x: 200, y: 140 },
-    parentDOMNode: container,
-    charge: 10,
-    onChargeInput: calcAndDisplayEfs,
-  }),
-  createElectricCharge({
     position: { x: 100, y: 250 },
     parentDOMNode: container,
     charge: 10,
@@ -55,10 +58,10 @@ const testCharge = createElectricCharge({
   onChargeInput: calcAndDisplayEfs,
 });
 
-const efsCalculator = createEFSCalculator(charges, testCharge, dielectricConstantController);
+const efsCalculator = createEFSCalculator(testCharge, dielectricConstantController);
 
 function calcAndDisplayEfs() {
-  const { efs, angle } = efsCalculator.calculate();
+  const { efs, angle } = efsCalculator.calculate(charges);
   const testChargePosition = testCharge.getPosition();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = '#000';

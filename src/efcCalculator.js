@@ -9,8 +9,11 @@
 // TODO: rename efc to efs everywhere!!
 const k = 9 * 10 ** 9;
 
-export default function createEFSCalculator(charges, testCharge, dielectricConstantController) {
-  const calculate = () => {
+export default function createEFSCalculator(testCharge, dielectricConstantController) {
+  const calculate = (charges) => {
+
+    console.log(charges)
+
     const testChargePosition = testCharge.getPosition();
     const dielectricConstant = dielectricConstantController.getDielectricConstant();
 
