@@ -1,4 +1,4 @@
-export default function createDnDController(draggableItems) {
+export default function createDnDController(draggableItems, onItemMove) {
   const items = [...draggableItems];
 
   let isMouseDown = false;
@@ -77,6 +77,7 @@ export default function createDnDController(draggableItems) {
     isDragging = isMouseDown;
     if (isDragging) {
       handleDragging(event);
+      onItemMove();
     }
   });
 

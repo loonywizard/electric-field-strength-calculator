@@ -1,5 +1,6 @@
 import createElectricCharge from './electricCharge';
 import createDnDController from './dndController';
+import createEFSCalculator from './efcCalculator';
 
 const container = document.getElementById('container');
 
@@ -16,4 +17,8 @@ const testCharge = createElectricCharge({
   isTest: true,
 });
 
-const dndController = createDnDController([...charges, testCharge]);
+const efsCalculator = createEFSCalculator(charges, testCharge);
+
+const onItemMove = efsCalculator.calculate;
+
+const dndController = createDnDController([...charges, testCharge], onItemMove);
