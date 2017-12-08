@@ -1,21 +1,26 @@
 /*
-* efcCalculator counts Electric Field Strength
-* EFS from one charge to another is k * q / r ** 2,
+* ElectricFieldStrengthCalculator calculates Electric Field Strength
+*
+* Electric Field Strength from one charge to another is k * q / r ** 2,
 * where q - charge, r - distance between charge and test charge, k = 9 * 10 ** 9
 *
-* EFS From all field is sum of all vectors of efs
+* Electric Field Strength of all field is sum of all vectors of efs
 * */
 
-// TODO: rename efc to efs everywhere!!
 const k = 9 * 10 ** 9;
 
-export default function createEFSCalculator(testCharge, dielectricConstantController) {
-  const calculate = (charges) => {
+export default class ElectricFieldStrengthCalculator {
+  constructor(chargesManager, dielectricConstantManager) {
+    this.chargesManager = chargesManager;
+    this.dielectricConstantManager = dielectricConstantManager;
+  }
 
-    console.log(charges)
+  calculate = () => {
+    const testCharge = this.chargesManager.getTestCharge();
+    const charges = this.chargesManager.getCharges();
+    const dielectricConstant = this.dielectricConstantManager.getDielectricConstant();
 
     const testChargePosition = testCharge.getPosition();
-    const dielectricConstant = dielectricConstantController.getDielectricConstant();
 
     let xEfs = 0;
     let yEfs = 0;
@@ -39,9 +44,5 @@ export default function createEFSCalculator(testCharge, dielectricConstantContro
     return {
       efs, angle,
     }
-  };
-
-  return {
-    calculate,
   };
 }
