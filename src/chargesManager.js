@@ -2,7 +2,23 @@ import createElectricCharge from './electricCharge';
 import ChargesDnDManager from './chargesDnDManager';
 
 export default class ChargesManager {
-  constructor(onChargesChange) {
+  /**
+   *
+   * ChargesManager needs ElectricFieldStrengthManager created and initialized
+   * before initializing ChargesManager, because we need to set onChargesChange callback,
+   * that is electricFieldStrengthManager.calcAndDisplayEfs function
+   *
+   * On the other hand, ElectricFieldStrengthManager needs ChargesManager to be initialized,
+   * because we need ChargesManager in ElectricFieldStrengthManager constructor
+   *
+   * See? This is a circle
+   *
+   * So I've decided to declare ChargesManager first, then initialize ElectricFieldStrengthManager,
+   * and only then initialize ChargesManager
+   *
+   * So this is why I use init function instead of constructor here
+   * */
+  init(onChargesChange) {
     this.container = document.getElementById('container');
     this.onChargesChange = onChargesChange;
     
