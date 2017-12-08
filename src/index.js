@@ -5,6 +5,16 @@ import ScreenSizeManager from './screenSizeManager';
 import DielectricConstantManager from './dielectricConstantManager';
 import createNewChargeCreator from './newChargeCreator';
 
+import Canvas from './canvas';
+import ElectricFieldStrengthVectorVisualiser from './electricFieldStrengthVectorVisualiser';
+
+
+const screenSizeManager = new ScreenSizeManager();
+
+const canvas = new Canvas(screenSizeManager);
+const ctx = canvas.getCtx();
+const electricFieldStrengthVectorVisualiser = new ElectricFieldStrengthVectorVisualiser(ctx);
+
 const createChargeCallback = (chargeValue) => {
   const charge = createElectricCharge({
     position: { x: 400, y: 400 },
@@ -24,22 +34,6 @@ const dielectricConstantManager = new DielectricConstantManager();
 const container = document.getElementById('container');
 
 const efsDisplay = document.getElementById('efs-display');
-
-const canvas = document.getElementById('canvas');
-
-const ctx = canvas.getContext('2d');
-
-const screenSizeManager = new ScreenSizeManager();
-
-function setCanvasSize() {
-  const screenSize = screenSizeManager.getScreenSize();
-  canvas.width = screenSize.x;
-  canvas.height = screenSize.y;
-}
-
-setCanvasSize();
-
-screenSizeManager.subscribe(setCanvasSize);
 
 const charges = [
   createElectricCharge({
@@ -63,12 +57,8 @@ const efsCalculator = createEFSCalculator(testCharge, dielectricConstantManager)
 function calcAndDisplayEfs() {
   const { efs, angle } = efsCalculator.calculate(charges);
   const testChargePosition = testCharge.getPosition();
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#000';
-  ctx.beginPath();
-  ctx.moveTo(testChargePosition.x, testChargePosition.y);
-  ctx.lineTo(testChargePosition.x + 100 * Math.cos(angle), testChargePosition.y + 100 * Math.sin(angle));
-  ctx.stroke();
+  canvas.clear();
+  electricFieldStrengthVectorVisualiser.visualise(testChargePosition, angle);
   efsDisplay.innerHTML = `${efs} В/м`;
 }
 
