@@ -1,4 +1,4 @@
-import createElectricCharge from './electricCharge';
+import ElectricCharge from './electricCharge';
 import ChargesDnDManager from './chargesDnDManager';
 
 export default class ChargesManager {
@@ -23,7 +23,7 @@ export default class ChargesManager {
     this.onChargesChange = onChargesChange;
     
     this.charges = [
-      createElectricCharge({
+      new ElectricCharge({
         position: { x: 100, y: 250 },
         parentDOMNode: this.container,
         charge: 10,
@@ -31,7 +31,7 @@ export default class ChargesManager {
       }),
     ];
 
-    this.testCharge = createElectricCharge({
+    this.testCharge = new ElectricCharge({
       position: { x: 300, y: 350},
       parentDOMNode: this.container,
       charge: 10,
@@ -46,7 +46,7 @@ export default class ChargesManager {
   }
   
   addCharge = (chargeValue) => {
-    const charge = createElectricCharge({
+    const charge = new ElectricCharge({
       position: { x: 400, y: 400 },
       parentDOMNode: this.container,
       charge: chargeValue,

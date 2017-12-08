@@ -1,9 +1,8 @@
 import ChargesManager from './chargesManager';
 import ScreenSizeManager from './screenSizeManager';
 import DielectricConstantManager from './dielectricConstantManager';
-import createNewChargeCreator from './newChargeCreator';
+import ChargesCreator from './chargesCreator';
 import Canvas from './canvas';
-
 import ElectricFieldStrengthManager from './electricFieldStrengthManager';
 
 const screenSizeManager = new ScreenSizeManager();
@@ -20,7 +19,7 @@ const electricFieldStrengthManager = new ElectricFieldStrengthManager(
 
 chargesManager.init(electricFieldStrengthManager.calcAndDisplayEfs);
 
-const chargesCreator = createNewChargeCreator(chargesManager.addCharge);
+const chargesCreator = new ChargesCreator(chargesManager.addCharge);
 
 dielectricConstantManager.subscribe(
   electricFieldStrengthManager.calcAndDisplayEfs,
