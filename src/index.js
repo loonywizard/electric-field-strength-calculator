@@ -1,7 +1,7 @@
 import createElectricCharge from './electricCharge';
 import createDnDController from './dndController';
 import createEFSCalculator from './efcCalculator';
-import createScreenSizeController from './screenSizeController';
+import ScreenSizeManager from './screenSizeManager';
 import DielectricConstantManager from './dielectricConstantManager';
 import createNewChargeCreator from './newChargeCreator';
 
@@ -29,17 +29,17 @@ const canvas = document.getElementById('canvas');
 
 const ctx = canvas.getContext('2d');
 
-const screenSizeController = createScreenSizeController();
+const screenSizeManager = new ScreenSizeManager();
 
 function setCanvasSize() {
-  const screenSize = screenSizeController.getScreenSize();
+  const screenSize = screenSizeManager.getScreenSize();
   canvas.width = screenSize.x;
   canvas.height = screenSize.y;
 }
 
 setCanvasSize();
 
-screenSizeController.subscribe(setCanvasSize);
+screenSizeManager.subscribe(setCanvasSize);
 
 const charges = [
   createElectricCharge({
