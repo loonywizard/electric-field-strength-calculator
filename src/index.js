@@ -1,5 +1,5 @@
 import createElectricCharge from './electricCharge';
-import createDnDController from './dndController';
+import ChargesDnDManager from './chargesDnDManager';
 import createEFSCalculator from './efcCalculator';
 import ScreenSizeManager from './screenSizeManager';
 import DielectricConstantManager from './dielectricConstantManager';
@@ -13,7 +13,7 @@ const createChargeCallback = (chargeValue) => {
     onChargeInput: calcAndDisplayEfs,
   });
   charges.push(charge);
-  dndController.addItem(charge);
+  chargesDnDManager.addItem(charge);
   calcAndDisplayEfs();
 };
 
@@ -76,4 +76,4 @@ dielectricConstantManager.subscribe(calcAndDisplayEfs);
 
 calcAndDisplayEfs();
 
-const dndController = createDnDController([...charges, testCharge], calcAndDisplayEfs);
+const chargesDnDManager = new ChargesDnDManager([...charges, testCharge], calcAndDisplayEfs);
