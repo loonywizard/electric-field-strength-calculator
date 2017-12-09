@@ -20,11 +20,11 @@ const electricFieldStrengthManager = new ElectricFieldStrengthManager(
 const chargesCreator = new ChargesCreator(chargesManager.addCharge);
 
 chargesManager.subscribe(
-  electricFieldStrengthManager.calcAndDisplayEfs,
+  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
 );
 
 dielectricConstantManager.subscribe(
-  electricFieldStrengthManager.calcAndDisplayEfs,
+  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
 );
 
-electricFieldStrengthManager.calcAndDisplayEfs();
+electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength();

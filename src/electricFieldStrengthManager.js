@@ -17,7 +17,7 @@ export default class ElectricFieldStrengthManager {
     this.electricFieldStrengthVectorVisualiser = new ElectricFieldStrengthVectorVisualiser(ctx);
   }
 
-  calcAndDisplayEfs = () => {
+  calculateAndDisplayElectricFieldStrength = () => {
     const { efs, angle } = this.electricFieldStrengthCalculator.calculate();
     this.canvas.clear();
     this.electricFieldStrengthVectorVisualiser.visualise(
