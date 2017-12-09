@@ -17,9 +17,11 @@ const electricFieldStrengthManager = new ElectricFieldStrengthManager(
   chargesManager, dielectricConstantManager, canvas,
 );
 
-chargesManager.init(electricFieldStrengthManager.calcAndDisplayEfs);
-
 const chargesCreator = new ChargesCreator(chargesManager.addCharge);
+
+chargesManager.subscribe(
+  electricFieldStrengthManager.calcAndDisplayEfs,
+);
 
 dielectricConstantManager.subscribe(
   electricFieldStrengthManager.calcAndDisplayEfs,
