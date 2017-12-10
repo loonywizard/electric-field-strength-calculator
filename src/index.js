@@ -1,3 +1,5 @@
+import './styles/index.scss';
+
 import ChargesManager from './chargesManager';
 import ScreenSizeManager from './screenSizeManager';
 import DielectricConstantManager from './dielectricConstantManager';
