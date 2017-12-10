@@ -39,19 +39,16 @@ export default class ElectricCharge {
 
       this.getElectricFieldStrengthDisplayNode = () => this.electricFieldStrengthDisplayNode;
     } else {
+      this.chargeDisplayNode = document.createElement('div');
       const chargeInputNode = document.createElement('div');
       const chargeInputApplyButton = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const chargeDisplayNode = document.createElement('div');
 
       chargeInputApplyButton.classList.add('close-icon');
 
       chargeInputApplyButton.innerHTML = closeSvgIcon;
 
-      chargeDisplayNode.innerHTML = `Q = ${(this.value * SI_PREFIXES[this.siPrefixName].value).toExponential(5)} C`;
-
-
       chargeInputNode.classList.add('edit-charge-container', 'hidden');
-      chargeDisplayNode.classList.add('charge-display');
+      this.chargeDisplayNode.classList.add('charge-display');
 
       const chargeInput = new ChargeInput({
         parentNode: chargeInputNode,
@@ -60,33 +57,40 @@ export default class ElectricCharge {
         onChargeInput: ({value, siPrefixName}) => {
           this.value = value;
           this.siPrefixName = siPrefixName;
-          chargeDisplayNode.innerHTML = `Q = ${(this.value * SI_PREFIXES[this.siPrefixName].value).toExponential(5)} C`;
+
+          this.displayChargeValue();
 
           onChargeInput();
         },
       });
 
-      chargeDisplayNode.addEventListener('click', () => {
-        chargeDisplayNode.classList.add('hidden');
+      this.chargeDisplayNode.addEventListener('click', () => {
+        this.chargeDisplayNode.classList.add('hidden');
         chargeInputNode.classList.remove('hidden');
         this.node.classList.add('charge-editing');
       });
 
       chargeInputApplyButton.addEventListener('click', () => {
-        chargeDisplayNode.classList.remove('hidden');
+        this.chargeDisplayNode.classList.remove('hidden');
         chargeInputNode.classList.add('hidden');
         this.node.classList.remove('charge-editing');
       });
 
+      this.displayChargeValue();
 
       chargeInputNode.appendChild(chargeInputApplyButton);
 
       this.node.appendChild(chargeInputNode);
-      this.node.appendChild(chargeDisplayNode);
+      this.node.appendChild(this.chargeDisplayNode);
     }
 
     parentDOMNode.appendChild(this.node);
   }
+
+  displayChargeValue = () => {
+    const q = this.value * SI_PREFIXES[this.siPrefixName].value;
+    this.chargeDisplayNode.innerHTML = `Q = ${q.toExponential(5)} C`;
+  };
 
   setNodePosition = () => {
     this.node.style.top = `${this.position.y}px`;

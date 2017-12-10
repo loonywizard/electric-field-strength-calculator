@@ -1,6 +1,15 @@
 import Dropdown from './dropdown';
 import { SI_PREFIXES } from './consts';
 
+/**
+ * ChargeInput allows user to change charge value: it's number and si prefix
+ * 
+ * ChargeInput looks like that:
+ * <div class="charge-input>
+ *   <input> - input for a number
+ *   <div class=dropdown"></div> - dropdown for si prefixes
+ * </div>
+ * */
 export default class ChargeInput {
   constructor(args) {
     const {
@@ -10,14 +19,14 @@ export default class ChargeInput {
     this.value = value;
     this.siPrefixName = siPrefixName;
 
-    this.node = document.createElement('div');
+    const node = document.createElement('div');
 
-    this.node.classList.add('charge-input');
+    node.classList.add('charge-input');
 
-    this.input = document.createElement('input');
-    this.input.setAttribute('type', 'number');
-    this.input.setAttribute('value', value);
-    this.input.classList.add('input');
+    const input = document.createElement('input');
+    input.setAttribute('type', 'number');
+    input.setAttribute('value', value);
+    input.classList.add('input');
 
     const onDropdownSelect = (siPrefixName) => {
       this.siPrefixName = siPrefixName;
@@ -28,17 +37,14 @@ export default class ChargeInput {
       });
     };
 
-    this.node.appendChild(this.input);
-
     const dropdown = new Dropdown({
-      parentNode: this.node,
       selectedItemId: siPrefixName,
       items: SI_PREFIXES,
       onItemSelect: onDropdownSelect,
     });
 
-    this.input.addEventListener('input', () => {
-      this.value = this.input.value;
+    input.addEventListener('input', () => {
+      this.value = input.value;
 
       onChargeInput({
         value: this.value,
@@ -46,6 +52,9 @@ export default class ChargeInput {
       });
     });
 
-    parentNode.appendChild(this.node);
+    node.appendChild(input);
+    node.appendChild(dropdown.render());
+
+    parentNode.appendChild(node);
   }
 }

@@ -11,9 +11,9 @@ export default class DielectricConstantManager extends  Observer {
     super();
 
     this.dielectricConstant = 1;
-    this.inputDOMNode = document.getElementById('dielectric-constant-input');
+    const inputDOMNode = document.getElementById('dielectric-constant-input');
 
-    this.inputDOMNode.addEventListener('input', ({ target: { value } }) => {
+    inputDOMNode.addEventListener('input', ({ target: { value } }) => {
       this.dielectricConstant = +value;
       this.notifySubscribers();
     });
