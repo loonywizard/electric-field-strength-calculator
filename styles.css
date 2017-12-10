@@ -23,7 +23,8 @@ body {
   height: 100%;
 }
 
-.efs-display {
+.efs-display,
+.charge-display {
   width: 180px;
   background: #000;
   margin-left: 45px;

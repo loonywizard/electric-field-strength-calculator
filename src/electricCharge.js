@@ -1,4 +1,5 @@
 import ChargeInput from './chargeInput';
+import { SI_PREFIXES } from './consts'
 
 export default class ElectricCharge {
   constructor(args) {
@@ -23,6 +24,13 @@ export default class ElectricCharge {
 
     this.setNodePosition();
 
+    this.node.addEventListener('click', (event) => {
+      const hasDragged = this.node.getAttribute('has-dragged');
+      if (hasDragged !== null) {
+        this.node.removeAttribute('has-dragged');
+      }
+    });
+
     if (isTest) {
       this.electricFieldStrengthDisplayNode = document.createElement('div');
       this.electricFieldStrengthDisplayNode.classList.add('efs-display');
@@ -31,8 +39,17 @@ export default class ElectricCharge {
       this.getElectricFieldStrengthDisplayNode = () => this.electricFieldStrengthDisplayNode;
     } else {
       const chargeInputNode = document.createElement('div');
+      const chargeInputApplyButton = document.createElement('button');
+      const chargeDisplayNode = document.createElement('div');
+
+      chargeDisplayNode.innerHTML = `Q = ${(this.value * SI_PREFIXES[this.siPrefixName].value).toExponential(5)} C`;
+
+      chargeInputApplyButton.innerHTML = 'Apply';
+
+      chargeInputNode.appendChild(chargeInputApplyButton);
 
       chargeInputNode.classList.add('charge-input', 'hidden');
+      chargeDisplayNode.classList.add('charge-display');
 
       const chargeInput = new ChargeInput({
         parentNode: chargeInputNode,
@@ -41,21 +58,24 @@ export default class ElectricCharge {
         onChargeInput: ({value, siPrefixName}) => {
           this.value = value;
           this.siPrefixName = siPrefixName;
+          chargeDisplayNode.innerHTML = `Q = ${(this.value * SI_PREFIXES[this.siPrefixName].value).toExponential(5)} C`;
 
           onChargeInput();
         },
       });
 
-      this.node.addEventListener('click', (event) => {
-        const hasDragged = this.node.getAttribute('has-dragged');
-        if (hasDragged !== null) {
-          this.node.removeAttribute('has-dragged');
-        } else if (event.target === this.node) {
-          chargeInputNode.classList.toggle('hidden');
-        }
+      chargeDisplayNode.addEventListener('click', () => {
+        chargeDisplayNode.classList.toggle('hidden');
+        chargeInputNode.classList.toggle('hidden');
+      });
+
+      chargeInputApplyButton.addEventListener('click', () => {
+        chargeDisplayNode.classList.toggle('hidden');
+        chargeInputNode.classList.toggle('hidden');
       });
 
       this.node.appendChild(chargeInputNode);
+      this.node.appendChild(chargeDisplayNode);
     }
 
     parentDOMNode.appendChild(this.node);

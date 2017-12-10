@@ -23,6 +23,6 @@ export default class ElectricFieldStrengthManager {
     this.electricFieldStrengthVectorVisualiser.visualise(
       this.chargesManager.getTestCharge().getPosition(), angle,
     );
-    this.efsDisplay.innerHTML = `E = ${efs.toExponential(5)} В/м`;
+    this.efsDisplay.innerHTML = `E = ${efs.toExponential(5)} v/m`;
   }
 }
