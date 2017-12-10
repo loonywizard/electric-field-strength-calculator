@@ -14,7 +14,6 @@ export default class ChargesCreator {
     };
 
     const inputNode = new ChargeInput({
-      parentNode: container,
       value: this.value,
       siPrefixName: this.siPrefixName,
       onChargeInput,
@@ -26,5 +25,7 @@ export default class ChargesCreator {
         siPrefixName: this.siPrefixName,
       });
     });
+
+    container.appendChild(inputNode.render());
   }
 }

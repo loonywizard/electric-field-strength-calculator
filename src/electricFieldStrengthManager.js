@@ -12,7 +12,8 @@ export default class ElectricFieldStrengthManager {
     this.chargesManager = chargesManager;
 
     this.electricFieldStrengthCalculator = new ElectricFieldStrengthCalculator(
-      chargesManager, dielectricConstantManager,
+      chargesManager,
+      dielectricConstantManager,
     );
     this.electricFieldStrengthVectorVisualiser = new ElectricFieldStrengthVectorVisualiser(ctx);
   }
@@ -21,7 +22,8 @@ export default class ElectricFieldStrengthManager {
     const { efs, angle } = this.electricFieldStrengthCalculator.calculate();
     this.canvas.clear();
     this.electricFieldStrengthVectorVisualiser.visualise(
-      this.chargesManager.getTestCharge().getPosition(), angle,
+      this.chargesManager.getTestCharge().getPosition(),
+      angle,
     );
     this.efsDisplay.innerHTML = `E = ${efs.toExponential(5)} v/m`;
   }

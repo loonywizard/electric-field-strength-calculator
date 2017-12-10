@@ -6,13 +6,13 @@ export default class ChargesManager extends Observer {
   constructor() {
     super();
 
-    const container = document.getElementById('container');
+    this.container = document.getElementById('container');
     this.onChargesChange = this.notifySubscribers;
 
     this.charges = [
       new ElectricCharge({
         position: { x: 100, y: 250 },
-        parentDOMNode: container,
+        parentDOMNode: this.container,
         value: 10,
         onChargeInput: this.onChargesChange,
         siPrefixName: 'NANO',
@@ -20,8 +20,8 @@ export default class ChargesManager extends Observer {
     ];
 
     this.testCharge = new ElectricCharge({
-      position: { x: 300, y: 350},
-      parentDOMNode: container,
+      position: { x: 300, y: 350 },
+      parentDOMNode: this.container,
       value: 10,
       siPrefixName: 'NANO',
       isTest: true,
@@ -37,7 +37,7 @@ export default class ChargesManager extends Observer {
   addCharge = ({ value, siPrefixName }) => {
     const charge = new ElectricCharge({
       position: { x: 400, y: 400 },
-      parentDOMNode: container,
+      parentDOMNode: this.container,
       value,
       siPrefixName,
       onChargeInput: this.onChargesChange,
@@ -47,8 +47,8 @@ export default class ChargesManager extends Observer {
     this.chargesDnDManager.addItem(charge);
     this.onChargesChange();
   };
-  
+
   getCharges = () => [...this.charges];
-  
+
   getTestCharge = () => this.testCharge;
 }

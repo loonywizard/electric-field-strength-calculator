@@ -16,17 +16,15 @@ const dielectricConstantManager = new DielectricConstantManager();
 const chargesManager = new ChargesManager();
 
 const electricFieldStrengthManager = new ElectricFieldStrengthManager(
-  chargesManager, dielectricConstantManager, canvas,
+  chargesManager,
+  dielectricConstantManager,
+  canvas,
 );
 
-const chargesCreator = new ChargesCreator(chargesManager.addCharge);
+new ChargesCreator(chargesManager.addCharge);
 
-chargesManager.subscribe(
-  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
-);
+chargesManager.subscribe(electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength);
 
-dielectricConstantManager.subscribe(
-  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
-);
+dielectricConstantManager.subscribe(electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength);
 
 electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength();

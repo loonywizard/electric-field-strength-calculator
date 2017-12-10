@@ -7,7 +7,7 @@
  * */
 export default class Dropdown {
   constructor(args) {
-    let {
+    const {
       selectedItemId,
       items,
       onItemSelect,

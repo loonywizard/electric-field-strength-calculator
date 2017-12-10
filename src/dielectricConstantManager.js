@@ -6,7 +6,7 @@ import Observer from './observer';
  * Manager handles changes of the DOM Node and notifies all subscribers
  * Manager has a method for returning a value of dielectric constant
  * */
-export default class DielectricConstantManager extends  Observer {
+export default class DielectricConstantManager extends Observer {
   constructor() {
     super();
 

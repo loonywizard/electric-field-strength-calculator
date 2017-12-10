@@ -16,4 +16,4 @@ export default class ElectricFieldStrengthVectorVisualiser {
     );
     this.ctx.stroke();
   };
-};
+}

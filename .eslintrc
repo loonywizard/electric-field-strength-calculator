@@ -1,0 +1,13 @@
+{
+  "extends": "eslint-config-airbnb-base",
+  "rules": {
+    "prefer-destructuring": ["off"],
+    "no-mixed-operators": ["off"],
+    "import/prefer-default-export": ["off"],
+    "no-new": ["off"]
+  },
+  "env": {
+    "browser": true
+  },
+  "parser": "babel-eslint"
+}

@@ -17,6 +17,6 @@ export default class Observer {
   };
 
   notifySubscribers = () => {
-    this.subscribers.forEach(fn => { fn(); });
+    this.subscribers.forEach((fn) => { fn(); });
   };
 }

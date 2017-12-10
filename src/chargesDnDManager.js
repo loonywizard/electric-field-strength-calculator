@@ -13,7 +13,7 @@ export default class ChargesDnDManager {
     this.mouseOffsetY = null;
     this.hasDraggingStarted = false;
 
-    this.items.forEach(item => {
+    this.items.forEach((item) => {
       this.addMouseDownListenerToItem(item);
     });
 
@@ -84,6 +84,6 @@ export default class ChargesDnDManager {
     this.draggingItem.setPosition({
       x: event.pageX - this.mouseOffsetX + 20,
       y: event.pageY - this.mouseOffsetY + 20,
-    })
+    });
   }
 }

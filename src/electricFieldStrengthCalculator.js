@@ -27,7 +27,7 @@ export default class ElectricFieldStrengthCalculator {
     let xEfs = 0;
     let yEfs = 0;
 
-    charges.forEach(charge => {
+    charges.forEach((charge) => {
       const { value: chargeValue, siPrefixName: chargeSiPrefixName } = charge.getCharge();
       const q = chargeValue * SI_PREFIXES[chargeSiPrefixName].value;
       const chargePosition = charge.getPosition();
@@ -46,6 +46,6 @@ export default class ElectricFieldStrengthCalculator {
 
     return {
       efs, angle,
-    }
+    };
   };
 }

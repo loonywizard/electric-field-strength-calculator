@@ -17,7 +17,7 @@ export default class Canvas {
     this.canvas.height = this.screenSize.y;
   };
 
-  clear = (screenSize) => {
+  clear = () => {
     const { x, y } = this.screenSize;
     this.ctx.clearRect(0, 0, x, y);
   };
