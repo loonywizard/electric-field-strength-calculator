@@ -3,8 +3,7 @@
   "rules": {
     "prefer-destructuring": ["off"],
     "no-mixed-operators": ["off"],
-    "import/prefer-default-export": ["off"],
-    "no-new": ["off"]
+    "import/prefer-default-export": ["off"]
   },
   "env": {
     "browser": true

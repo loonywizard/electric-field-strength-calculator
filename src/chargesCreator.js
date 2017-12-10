@@ -1,7 +1,10 @@
 import ChargeInput from './chargeInput';
+import Observer from './observer';
 
-export default class ChargesCreator {
-  constructor(createChargeCallback) {
+export default class ChargesCreator extends Observer {
+  constructor() {
+    super();
+
     const buttonNode = document.getElementById('add-charge-button');
     const container = document.getElementById('new-charge-container');
 
@@ -20,7 +23,7 @@ export default class ChargesCreator {
     });
 
     buttonNode.addEventListener('click', () => {
-      createChargeCallback({
+      this.notifySubscribers({
         value: this.value,
         siPrefixName: this.siPrefixName,
       });

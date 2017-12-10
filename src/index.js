@@ -21,7 +21,9 @@ const electricFieldStrengthManager = new ElectricFieldStrengthManager(
   canvas,
 );
 
-new ChargesCreator(chargesManager.addCharge);
+const chargesCreator = new ChargesCreator();
+
+chargesCreator.subscribe(chargesManager.addCharge);
 
 chargesManager.subscribe(electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength);
 
