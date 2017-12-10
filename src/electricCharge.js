@@ -1,17 +1,21 @@
+import ChargeInput from './chargeInput';
+
 export default class ElectricCharge {
   constructor(args) {
     let {
       isTest = false,
       parentDOMNode,
       onChargeInput,
-      charge,
+      value,
+      siPrefixName,
       position,
     } = args;
 
     this.isTest = isTest;
     this.parentDOMNode = parentDOMNode;
     this.onChargeInput = onChargeInput;
-    this.charge = charge;
+    this.value = value;
+    this.siPrefixName = siPrefixName;
     this.position = position;
 
     this.node = document.createElement('div');
@@ -19,22 +23,27 @@ export default class ElectricCharge {
 
     this.setNodePosition();
 
-    const chargeInputNode = document.createElement('input');
+    const chargeInputNode = document.createElement('div');
 
     chargeInputNode.classList.add('charge-input', 'hidden');
-    chargeInputNode.setAttribute('type', 'number');
-    chargeInputNode.value = charge;
 
-    chargeInputNode.addEventListener('input', () => {
-      this.charge = chargeInputNode.value;
-      onChargeInput();
+    new ChargeInput({
+      parentNode: chargeInputNode,
+      value,
+      siPrefixName,
+      onChargeInput: ({ value, siPrefixName }) => {
+        this.value = value;
+        this.siPrefixName = siPrefixName;
+
+        onChargeInput();
+      },
     });
 
     this.node.addEventListener('click', (event) => {
       const hasDragged = this.node.getAttribute('has-dragged');
       if (hasDragged !== null) {
         this.node.removeAttribute('has-dragged');
-      } else if (event.target !== chargeInputNode) {
+      } else if (event.target === this.node) {
         chargeInputNode.classList.toggle('hidden');
       }
     });
@@ -50,7 +59,10 @@ export default class ElectricCharge {
   };
 
   getPosition = () => ({ ...this.position });
-  getCharge = () => this.charge;
+  getCharge = () => ({
+    siPrefixName: this.siPrefixName,
+    value: this.value,
+  });
   getDOMNode = () => this.node;
 
   setPosition = (newPosition) => {

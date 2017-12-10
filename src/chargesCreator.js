@@ -21,7 +21,10 @@ export default class ChargesCreator {
     });
 
     buttonNode.addEventListener('click', () => {
-      createChargeCallback(this.value);
+      createChargeCallback({
+        value: this.value,
+        siPrefixName: this.siPrefixName,
+      });
     });
   }
 }

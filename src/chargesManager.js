@@ -13,15 +13,17 @@ export default class ChargesManager extends Observer {
       new ElectricCharge({
         position: { x: 100, y: 250 },
         parentDOMNode: this.container,
-        charge: 10,
+        value: 10,
         onChargeInput: this.onChargesChange,
+        siPrefixName: 'NANO',
       }),
     ];
 
     this.testCharge = new ElectricCharge({
       position: { x: 300, y: 350},
       parentDOMNode: this.container,
-      charge: 10,
+      value: 10,
+      siPrefixName: 'NANO',
       isTest: true,
       onChargeInput: this.onChargesChange,
     });
@@ -32,11 +34,12 @@ export default class ChargesManager extends Observer {
     );
   }
 
-  addCharge = (chargeValue) => {
+  addCharge = ({ value, siPrefixName }) => {
     const charge = new ElectricCharge({
       position: { x: 400, y: 400 },
       parentDOMNode: this.container,
-      charge: chargeValue,
+      value,
+      siPrefixName,
       onChargeInput: this.onChargesChange,
     });
 

@@ -7,6 +7,8 @@
 * Electric Field Strength of all field is sum of all vectors of efs
 * */
 
+import { SI_PREFIXES } from './consts';
+
 const k = 9 * 10 ** 9;
 
 export default class ElectricFieldStrengthCalculator {
@@ -26,7 +28,8 @@ export default class ElectricFieldStrengthCalculator {
     let yEfs = 0;
 
     charges.forEach(charge => {
-      const q = charge.getCharge();
+      const { value: chargeValue, siPrefixName: chargeSiPrefixName } = charge.getCharge();
+      const q = chargeValue * SI_PREFIXES[chargeSiPrefixName].value;
       const chargePosition = charge.getPosition();
       const dx = testChargePosition.x - chargePosition.x;
       const dy = testChargePosition.y - chargePosition.y;
