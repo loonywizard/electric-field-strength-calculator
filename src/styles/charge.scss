@@ -1,0 +1,30 @@
+@import "variables.scss";
+
+.efs-display,
+.charge-display {
+  width: 180px;
+  background: $dark-gray;
+  margin-left: 45px;
+  margin-top: 7px;
+  color: $white;
+  padding: 2px 10px;
+  border-radius: 5px;
+}
+
+.charge {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: $red;
+  transform: translate(-20px, -20px);
+  cursor: pointer;
+}
+
+.test-charge {
+  background: $dark-gray;
+}
+
+.charge-editing {
+  z-index: 2;
+}
