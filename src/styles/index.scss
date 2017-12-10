@@ -1,3 +1,5 @@
+@import "dropdown";
+
 html,
 body {
   margin: 0;
@@ -71,38 +73,15 @@ body {
   cursor: pointer;
 }
 
-.dropdown {
-  position: relative;
-}
 
-.dropdown .button {
-  border-radius: 0 4px 4px 0;
-  width: 70px;
-}
 
-.dropdown .items-list {
-  margin-top: 5px;
-  position: absolute;
-  color: #000;
-  border: 1px solid #000;
-  border-radius: 3px;
-  background: #fff;
-}
-
-.dropdown .items-list > div {
-  padding: 2px 10px;
-  border-bottom: 1px solid #000;
-  cursor: pointer;
-}
 
 .close-icon {
   width: 15px;
   height: 15px;
 }
 
-.dropdown .items-list > div:last-child {
-  border-bottom: none;
-}
+
 
 .test-charge {
   background: black;
