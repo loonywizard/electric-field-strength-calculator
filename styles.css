@@ -24,11 +24,13 @@ body {
 }
 
 .efs-display {
-  padding: 10px 20px;
+  width: 180px;
   background: #000;
+  margin-left: 45px;
+  margin-top: 5px;
   color: #fff;
-  font-size: 1.4rem;
-  font-family: sans-serif;
+  padding: 2px 10px;
+  border-radius: 5px;
 }
 
 .charge {

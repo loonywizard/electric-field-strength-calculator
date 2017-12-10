@@ -8,7 +8,7 @@ export default class ElectricFieldStrengthManager {
     this.canvas = canvas;
     this.chargesManager = chargesManager;
 
-    this.efsDisplay = document.getElementById('efs-display');
+    this.efsDisplay = chargesManager.getTestCharge().getElectricFieldStrengthDisplayNode();
     this.chargesManager = chargesManager;
 
     this.electricFieldStrengthCalculator = new ElectricFieldStrengthCalculator(
@@ -23,6 +23,6 @@ export default class ElectricFieldStrengthManager {
     this.electricFieldStrengthVectorVisualiser.visualise(
       this.chargesManager.getTestCharge().getPosition(), angle,
     );
-    this.efsDisplay.innerHTML = `${efs} В/м`;
+    this.efsDisplay.innerHTML = `E = ${efs.toExponential(5)} В/м`;
   }
 }

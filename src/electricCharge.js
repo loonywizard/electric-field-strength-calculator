@@ -23,32 +23,40 @@ export default class ElectricCharge {
 
     this.setNodePosition();
 
-    const chargeInputNode = document.createElement('div');
+    if (isTest) {
+      this.electricFieldStrengthDisplayNode = document.createElement('div');
+      this.electricFieldStrengthDisplayNode.classList.add('efs-display');
+      this.node.appendChild(this.electricFieldStrengthDisplayNode);
 
-    chargeInputNode.classList.add('charge-input', 'hidden');
+      this.getElectricFieldStrengthDisplayNode = () => this.electricFieldStrengthDisplayNode;
+    } else {
+      const chargeInputNode = document.createElement('div');
 
-    new ChargeInput({
-      parentNode: chargeInputNode,
-      value,
-      siPrefixName,
-      onChargeInput: ({ value, siPrefixName }) => {
-        this.value = value;
-        this.siPrefixName = siPrefixName;
+      chargeInputNode.classList.add('charge-input', 'hidden');
 
-        onChargeInput();
-      },
-    });
+      const chargeInput = new ChargeInput({
+        parentNode: chargeInputNode,
+        value,
+        siPrefixName,
+        onChargeInput: ({value, siPrefixName}) => {
+          this.value = value;
+          this.siPrefixName = siPrefixName;
 
-    this.node.addEventListener('click', (event) => {
-      const hasDragged = this.node.getAttribute('has-dragged');
-      if (hasDragged !== null) {
-        this.node.removeAttribute('has-dragged');
-      } else if (event.target === this.node) {
-        chargeInputNode.classList.toggle('hidden');
-      }
-    });
+          onChargeInput();
+        },
+      });
 
-    this.node.appendChild(chargeInputNode);
+      this.node.addEventListener('click', (event) => {
+        const hasDragged = this.node.getAttribute('has-dragged');
+        if (hasDragged !== null) {
+          this.node.removeAttribute('has-dragged');
+        } else if (event.target === this.node) {
+          chargeInputNode.classList.toggle('hidden');
+        }
+      });
+
+      this.node.appendChild(chargeInputNode);
+    }
 
     parentDOMNode.appendChild(this.node);
   }
