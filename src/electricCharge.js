@@ -69,13 +69,15 @@ export default class ElectricCharge {
       });
 
       chargeDisplayNode.addEventListener('click', () => {
-        chargeDisplayNode.classList.toggle('hidden');
-        chargeInputNode.classList.toggle('hidden');
+        chargeDisplayNode.classList.add('hidden');
+        chargeInputNode.classList.remove('hidden');
+        this.node.classList.add('charge-editing');
       });
 
       chargeInputApplyButton.addEventListener('click', () => {
-        chargeDisplayNode.classList.toggle('hidden');
-        chargeInputNode.classList.toggle('hidden');
+        chargeDisplayNode.classList.remove('hidden');
+        chargeInputNode.classList.add('hidden');
+        this.node.classList.remove('charge-editing');
       });
 
 
