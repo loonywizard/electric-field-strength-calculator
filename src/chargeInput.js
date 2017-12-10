@@ -12,9 +12,12 @@ export default class ChargeInput {
 
     this.node = document.createElement('div');
 
+    this.node.classList.add('charge-input');
+
     this.input = document.createElement('input');
     this.input.setAttribute('type', 'number');
     this.input.setAttribute('value', value);
+    this.input.classList.add('input');
 
     const onDropdownSelect = (siPrefixName) => {
       this.siPrefixName = siPrefixName;
@@ -24,6 +27,8 @@ export default class ChargeInput {
         siPrefixName: this.siPrefixName,
       });
     };
+
+    this.node.appendChild(this.input);
 
     const dropdown = new Dropdown({
       parentNode: this.node,
@@ -41,7 +46,6 @@ export default class ChargeInput {
       });
     });
 
-    this.node.appendChild(this.input);
     parentNode.appendChild(this.node);
   }
 }

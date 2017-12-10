@@ -11,11 +11,19 @@ export default class Dropdown {
     this.selectedItemId = selectedItemId;
 
     this.node = document.createElement('div');
+    this.node.classList.add('dropdown');
+
 
     this.button = document.createElement('button');
     this.button.innerHTML = items[selectedItemId].name;
+    this.button.classList.add('button');
 
-    this.dropdown = document.createElement('dropdown');
+    this.itemsList = document.createElement('div');
+    this.itemsList.classList.add('items-list', 'hidden');
+
+    this.button.addEventListener('click', () => {
+      this.itemsList.classList.toggle('hidden');
+    });
 
     Object.keys(items).forEach((itemId) => {
       const itemNode = document.createElement('div');
@@ -24,11 +32,11 @@ export default class Dropdown {
         this.button.innerHTML = items[itemId].name;
         onItemSelect(itemId);
       });
-      this.dropdown.appendChild(itemNode);
+      this.itemsList.appendChild(itemNode);
     });
 
     this.node.appendChild(this.button);
-    this.node.appendChild(this.dropdown);
+    this.node.appendChild(this.itemsList);
 
     parentNode.appendChild(this.node);
   }
