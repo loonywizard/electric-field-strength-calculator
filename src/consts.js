@@ -1,22 +1,18 @@
 export const SI_PREFIXES = {
   MILLI: {
     value: 10 ** -3,
-    nameEn: 'm',
-    nameRu: 'м',
+    name: 'milli',
   },
   MICRO: {
-    value: 10 ** -3,
-    nameEn: 'µ',
-    nameRu: 'мк',
+    value: 10 ** -6,
+    name: 'micro',
   },
   NANO: {
-    value: 10 ** -3,
-    nameEn: 'n',
-    nameRu: 'н',
+    value: 10 ** -9,
+    name: 'nano',
   },
   PICO: {
-    value: 10 ** -3,
-    nameEn: 'p',
-    nameRu: 'п',
+    value: 10 ** -12,
+    name: 'pico',
   },
 };
