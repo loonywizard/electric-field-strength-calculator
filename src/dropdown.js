@@ -29,6 +29,7 @@ export default class Dropdown {
       const itemNode = document.createElement('div');
       itemNode.innerHTML = items[itemId].name;
       itemNode.addEventListener('click', () => {
+        this.itemsList.classList.add('hidden');
         this.button.innerHTML = items[itemId].name;
         onItemSelect(itemId);
       });
