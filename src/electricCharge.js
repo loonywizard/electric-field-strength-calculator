@@ -52,7 +52,7 @@ export default class ElectricCharge {
       chargeDisplayNode.innerHTML = `Q = ${(this.value * SI_PREFIXES[this.siPrefixName].value).toExponential(5)} C`;
 
 
-      chargeInputNode.classList.add('charge-input-container', 'hidden');
+      chargeInputNode.classList.add('edit-charge-container', 'hidden');
       chargeDisplayNode.classList.add('charge-display');
 
       const chargeInput = new ChargeInput({

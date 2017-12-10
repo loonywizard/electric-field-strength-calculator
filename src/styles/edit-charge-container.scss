@@ -1,0 +1,13 @@
+@import "variables.scss";
+
+.edit-charge-container {
+  width: 235px;
+  display: flex;
+  margin-left: 45px;
+  margin-top: 2px;
+  padding: 5px;
+  background: $white;
+  border-radius: 0 5px;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,4 +1,6 @@
-@import "dropdown";
+@import "dropdown.scss";
+@import "charge-input.scss";
+@import "edit-charge-container.scss";
 
 html,
 body {
@@ -36,32 +38,7 @@ body {
   border-radius: 5px;
 }
 
-.charge-input-container {
-  width: 240px;
-  display: flex;
-  margin-left: 45px;
-  margin-top: 2px;
-  padding: 5px;
-  background: #fff;
-  border-radius: 5px;
-  align-items: center;
-}
 
-.charge-input-container .charge-input {
-  margin-right: 15px;
-}
-
-.charge-input .input {
-  width: 125px;
-  padding: 1px 5px;
-  font-size: 1rem;
-  line-height: 1.25;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 4px 0 0 4px;
-  color: #495057;
-}
 
 .charge {
   position: absolute;
@@ -92,9 +69,7 @@ body {
   background: green;
 }
 
-.charge-input {
-  display: flex;
-}
+
 
 .hidden {
   display: none;
