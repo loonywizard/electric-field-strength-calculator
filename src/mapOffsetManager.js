@@ -1,4 +1,5 @@
 import Observer from './observer';
+import { SCALING_DIRECTIONS } from './consts';
 
 export default class MapOffsetManager extends Observer {
   constructor(canvasNode, mapScaleManager, screenSizeManager) {
@@ -68,19 +69,15 @@ export default class MapOffsetManager extends Observer {
     const scale = this.mapScaleManager.getScale();
     const screenSize = this.screenSizeManager.getScreenSize();
 
-    if (direction === 'UP') {
+    if (direction === SCALING_DIRECTIONS.UP) {
       const dx = ((scaleMultiplier - 1) / scaleMultiplier) * screenSize.x / 2;
       const dy = ((scaleMultiplier - 1) / scaleMultiplier) * screenSize.y / 2;
 
-
       this.offset.x -= scaleMultiplier * dx / (scale);
       this.offset.y -= scaleMultiplier * dy / (scale);
-    } else {
-      //screenSize.x * (scaleMultiplier - 1)
+    } else if (direction === SCALING_DIRECTIONS.DOWN) {
       const dx = screenSize.x * (scaleMultiplier - 1) / (2 * scaleMultiplier);
       const dy = screenSize.y * (scaleMultiplier - 1) / (2 * scaleMultiplier);
-
-      console.log(dx, dy);
 
       this.offset.x += dx / (scale);
       this.offset.y += dy / (scale);

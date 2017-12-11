@@ -16,3 +16,8 @@ export const SI_PREFIXES = {
     name: 'pico',
   },
 };
+
+export const SCALING_DIRECTIONS = {
+  UP: 'UP',
+  DOWN: 'DOWN',
+};

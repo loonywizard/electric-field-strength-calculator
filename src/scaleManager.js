@@ -1,4 +1,5 @@
 import Observer from './observer';
+import { SCALING_DIRECTIONS } from './consts';
 
 export default class ScaleManager extends Observer {
   constructor() {
@@ -14,12 +15,12 @@ export default class ScaleManager extends Observer {
 
     scaleUpButton.addEventListener('click', () => {
       this.scale *= this.scaleMultiplier;
-      this.notifySubscribers('UP');
+      this.notifySubscribers(SCALING_DIRECTIONS.UP);
     });
 
     scaleDownButton.addEventListener('click', () => {
       this.scale /= this.scaleMultiplier;
-      this.notifySubscribers('DOWN');
+      this.notifySubscribers(SCALING_DIRECTIONS.DOWN);
     });
   }
 
