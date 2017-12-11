@@ -33,16 +33,14 @@ const chargesCreator = new ChargesCreator();
 
 scaleManager.subscribe(
   chargesManager.updateChargesPositions,
-);
-
-scaleManager.subscribe(
+  mapOffsetManager.onMapScale,
   electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
 );
 
-scaleManager.subscribe(mapOffsetManager.onMapScale);
-
-mapOffsetManager.subscribe(chargesManager.updateChargesPositions);
-mapOffsetManager.subscribe(electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength);
+mapOffsetManager.subscribe(
+  chargesManager.updateChargesPositions,
+  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
+);
 
 chargesCreator.subscribe(chargesManager.addCharge);
 
