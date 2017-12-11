@@ -1,5 +1,7 @@
 import Observer from './observer';
 import { SCALING_DIRECTIONS } from './consts';
+import minusSvgIcon from './resources/minus.svg';
+import plusSvgIcon from './resources/plus.svg';
 
 export default class ScaleManager extends Observer {
   constructor() {
@@ -12,6 +14,9 @@ export default class ScaleManager extends Observer {
 
     const scaleUpButton = document.getElementById('scale-up-button');
     const scaleDownButton = document.getElementById('scale-down-button');
+
+    scaleUpButton.innerHTML = plusSvgIcon;
+    scaleDownButton.innerHTML = minusSvgIcon;
 
     scaleUpButton.addEventListener('click', () => {
       this.scale *= this.scaleMultiplier;

@@ -1,4 +1,8 @@
 export const SI_PREFIXES = {
+  NONE: {
+    value: 1,
+    name: '(none)',
+  },
   MILLI: {
     value: 10 ** -3,
     name: 'milli',
@@ -14,6 +18,10 @@ export const SI_PREFIXES = {
   PICO: {
     value: 10 ** -12,
     name: 'pico',
+  },
+  FEMTO: {
+    value: 10 ** -15,
+    name: 'femto',
   },
 };
 

@@ -2,7 +2,11 @@
   display: flex;
   padding: 10px;
 
-  .button {
-    margin-right: 20px;
+  & > .button {
+    border-radius: 4px 0 0 4px;
+  }
+
+  .input {
+    border-radius: 0;
   }
 }

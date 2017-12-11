@@ -6,17 +6,16 @@
   <body>
   <canvas id="canvas" class="canvas"></canvas>
   <div id="container" class="container">
+    <div id="new-charge-container" class="new-charge-container">
+      <div class="button" id="add-charge-button">Add electric charge</div>
+    </div>
     <div id="dielectric-constant-container" class="dielectric-constant-container">
       Dielectric constant:
       <input type="number" class="input" id="dielectric-constant-input" min="1" value="1">
     </div>
-    <div id="new-charge-container" class="new-charge-container">
-      <div class="button" id="add-charge-button">Add electric charge</div>
-    </div>
     <div class="scale-controls">
-      Scale control
-      <div class="button" id="scale-up-button">Scale UP</div>
-      <div class="button" id="scale-down-button">Scale DOWN</div>
+      <div class="scale-button" id="scale-up-button"></div>
+      <div class="scale-button" id="scale-down-button"></div>
     </div>
   </div>
   <script src="dist/bundle.js"></script>
