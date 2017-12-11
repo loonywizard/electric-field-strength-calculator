@@ -19,7 +19,7 @@ const dielectricConstantManager = new DielectricConstantManager();
 
 const mapOffsetManager = new MapOffsetManager(canvas.getDOMNode(), scaleManager, screenSizeManager);
 
-const chargesManager = new ChargesManager(mapOffsetManager, scaleManager);
+const chargesManager = new ChargesManager(mapOffsetManager, scaleManager, screenSizeManager);
 
 const electricFieldStrengthManager = new ElectricFieldStrengthManager(
   chargesManager,
