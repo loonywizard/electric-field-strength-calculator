@@ -1,4 +1,6 @@
-export function drawArrow({ ctx, position, angle, length = 300 }) {
+export function drawArrow({
+  ctx, position, angle, length = 300,
+}) {
   const arrowLength = 35;
   const arrowWidth = 8;
   const phi = Math.atan2(arrowWidth, arrowLength);
