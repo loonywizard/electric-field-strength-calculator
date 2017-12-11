@@ -9,6 +9,6 @@ export default class ScaleRuler {
   setScaleValue = () => {
     const mapScale = this.mapScaleManager.getScale();
 
-    this.scaleValueNode.innerHTML = `${(mapScale * 100).toExponential(2)}m`;
+    this.scaleValueNode.innerHTML = `${(1 / mapScale * 100).toExponential(2)}m`;
   };
 }
