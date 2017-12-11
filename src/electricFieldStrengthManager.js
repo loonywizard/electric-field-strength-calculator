@@ -17,7 +17,8 @@ export default class ElectricFieldStrengthManager {
       dielectricConstantManager,
     );
     this.electricFieldStrengthVectorVisualiser = new ElectricFieldStrengthVectorVisualiser(
-      ctx, mapOffsetManager.getMapOffset,
+      ctx,
+      mapOffsetManager.getMapOffset,
     );
   }
 

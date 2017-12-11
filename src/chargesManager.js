@@ -39,7 +39,7 @@ export default class ChargesManager extends Observer {
   }
 
   updateChargesPositions = () => {
-    this.charges.forEach(charge => { charge.setNodePosition(); });
+    this.charges.forEach((charge) => { charge.setNodePosition(); });
     this.testCharge.setNodePosition();
   };
 

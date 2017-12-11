@@ -34,6 +34,8 @@ chargesCreator.subscribe(chargesManager.addCharge);
 
 chargesManager.subscribe(electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength);
 
-dielectricConstantManager.subscribe(electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength);
+dielectricConstantManager.subscribe(
+  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
+);
 
 electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength();
