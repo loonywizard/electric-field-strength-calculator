@@ -1,0 +1,18 @@
+@import "variables.scss";
+
+.scale-ruler-container {
+  display: flex;
+  margin: 0 10px;
+
+  .scale-value {
+    width: 70px;
+    text-align: right;
+  }
+
+  .scale-ruler {
+    width: 100px;
+    height: 3px;
+    margin: 10px;
+    background: $dark-gray;
+  }
+}

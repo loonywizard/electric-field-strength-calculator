@@ -8,8 +8,12 @@ import Canvas from './canvas';
 import ElectricFieldStrengthManager from './electricFieldStrengthManager';
 import MapOffsetManager from './mapOffsetManager';
 import ScaleManager from './scaleManager';
+import ScaleRuler from './scaleRuler';
+
 
 const scaleManager = new ScaleManager();
+
+const scaleRuler = new ScaleRuler(scaleManager);
 
 const screenSizeManager = new ScreenSizeManager();
 
@@ -35,6 +39,7 @@ scaleManager.subscribe(
   chargesManager.updateChargesPositions,
   mapOffsetManager.onMapScale,
   electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
+  scaleRuler.setScaleValue,
 );
 
 mapOffsetManager.subscribe(
