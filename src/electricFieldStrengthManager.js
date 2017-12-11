@@ -2,11 +2,12 @@ import ElectricFieldStrengthCalculator from './electricFieldStrengthCalculator';
 import ElectricFieldStrengthVectorVisualiser from './electricFieldStrengthVectorVisualiser';
 
 export default class ElectricFieldStrengthManager {
-  constructor(chargesManager, dielectricConstantManager, canvas) {
+  constructor(chargesManager, dielectricConstantManager, canvas, mapOffsetManager) {
     const ctx = canvas.getCtx();
 
     this.canvas = canvas;
     this.chargesManager = chargesManager;
+    this.mapOffsetManager = mapOffsetManager;
 
     this.efsDisplay = chargesManager.getTestCharge().getElectricFieldStrengthDisplayNode();
     this.chargesManager = chargesManager;
@@ -15,7 +16,9 @@ export default class ElectricFieldStrengthManager {
       chargesManager,
       dielectricConstantManager,
     );
-    this.electricFieldStrengthVectorVisualiser = new ElectricFieldStrengthVectorVisualiser(ctx);
+    this.electricFieldStrengthVectorVisualiser = new ElectricFieldStrengthVectorVisualiser(
+      ctx, mapOffsetManager.getMapOffset,
+    );
   }
 
   calculateAndDisplayElectricFieldStrength = () => {

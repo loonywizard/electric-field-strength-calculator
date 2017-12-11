@@ -10,6 +10,7 @@ export default class ElectricCharge {
     this.value = args.value;
     this.siPrefixName = args.siPrefixName;
     this.position = args.position;
+    this.getMapOffset = args.getMapOffset;
 
     this.node = document.createElement('div');
     this.node.className = `charge${this.isTest ? ' test-charge' : ''}`;
@@ -82,8 +83,10 @@ export default class ElectricCharge {
   };
 
   setNodePosition = () => {
-    this.node.style.top = `${this.position.y}px`;
-    this.node.style.left = `${this.position.x}px`;
+    const mapOffset = this.getMapOffset();
+
+    this.node.style.top = `${this.position.y + mapOffset.y}px`;
+    this.node.style.left = `${this.position.x + mapOffset.x}px`;
   };
 
   getPosition = () => ({ ...this.position });

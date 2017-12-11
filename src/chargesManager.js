@@ -3,11 +3,12 @@ import ElectricCharge from './electricCharge';
 import ChargesDnDManager from './chargesDnDManager';
 
 export default class ChargesManager extends Observer {
-  constructor() {
+  constructor(mapOffsetManager) {
     super();
 
     this.container = document.getElementById('container');
     this.onChargesChange = this.notifySubscribers;
+    this.mapOffsetManager = mapOffsetManager;
 
     this.charges = [
       new ElectricCharge({
@@ -16,6 +17,7 @@ export default class ChargesManager extends Observer {
         value: 10,
         onChargeInput: this.onChargesChange,
         siPrefixName: 'NANO',
+        getMapOffset: this.mapOffsetManager.getMapOffset,
       }),
     ];
 
@@ -26,13 +28,20 @@ export default class ChargesManager extends Observer {
       siPrefixName: 'NANO',
       isTest: true,
       onChargeInput: this.onChargesChange,
+      getMapOffset: this.mapOffsetManager.getMapOffset,
     });
 
     this.chargesDnDManager = new ChargesDnDManager(
       [...this.charges, this.testCharge],
       this.onChargesChange,
+      mapOffsetManager.getMapOffset,
     );
   }
+
+  updateChargesPositions = () => {
+    this.charges.forEach(charge => { charge.setNodePosition(); });
+    this.testCharge.setNodePosition();
+  };
 
   addCharge = ({ value, siPrefixName }) => {
     const charge = new ElectricCharge({
@@ -41,6 +50,7 @@ export default class ChargesManager extends Observer {
       value,
       siPrefixName,
       onChargeInput: this.onChargesChange,
+      getMapOffset: this.mapOffsetManager.getMapOffset,
     });
 
     this.charges.push(charge);

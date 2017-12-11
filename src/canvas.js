@@ -23,4 +23,6 @@ export default class Canvas {
   };
 
   getCtx = () => this.ctx;
+
+  getDOMNode = () => this.canvas;
 }

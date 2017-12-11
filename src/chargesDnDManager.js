@@ -2,9 +2,10 @@
  * ChargesDnDManager allows us to drag and drop charges, so we can change their positions
  * */
 export default class ChargesDnDManager {
-  constructor(charges, onChargeMove) {
+  constructor(charges, onChargeMove, getMapOffset) {
     this.items = charges;
     this.onItemMove = onChargeMove;
+    this.getMapOffset = getMapOffset;
 
     this.isMouseDown = false;
     this.isDragging = false;
@@ -81,9 +82,11 @@ export default class ChargesDnDManager {
       this.hasDraggingStarted = true;
     }
 
+    const mapOffset = this.getMapOffset();
+
     this.draggingItem.setPosition({
-      x: event.pageX - this.mouseOffsetX + 20,
-      y: event.pageY - this.mouseOffsetY + 20,
+      x: event.pageX - this.mouseOffsetX + 20 - mapOffset.x,
+      y: event.pageY - this.mouseOffsetY + 20 - mapOffset.y,
     });
   }
 }
