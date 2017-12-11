@@ -17,7 +17,7 @@ const canvas = new Canvas(screenSizeManager);
 
 const dielectricConstantManager = new DielectricConstantManager();
 
-const mapOffsetManager = new MapOffsetManager(canvas.getDOMNode(), scaleManager);
+const mapOffsetManager = new MapOffsetManager(canvas.getDOMNode(), scaleManager, screenSizeManager);
 
 const chargesManager = new ChargesManager(mapOffsetManager, scaleManager);
 
@@ -38,6 +38,8 @@ scaleManager.subscribe(
 scaleManager.subscribe(
   electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
 );
+
+scaleManager.subscribe(mapOffsetManager.onMapScale);
 
 mapOffsetManager.subscribe(chargesManager.updateChargesPositions);
 mapOffsetManager.subscribe(electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength);

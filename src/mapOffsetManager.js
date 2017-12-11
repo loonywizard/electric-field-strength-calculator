@@ -1,8 +1,11 @@
 import Observer from './observer';
 
 export default class MapOffsetManager extends Observer {
-  constructor(canvasNode, mapScaleManager) {
+  constructor(canvasNode, mapScaleManager, screenSizeManager) {
     super();
+
+    this.mapScaleManager = mapScaleManager;
+    this.screenSizeManager = screenSizeManager;
 
     this.offset = {
       x: 0,
@@ -59,6 +62,32 @@ export default class MapOffsetManager extends Observer {
       lastMousePosition = null;
     });
   }
+
+  onMapScale = (direction) => {
+    const scaleMultiplier = this.mapScaleManager.getScaleMultiplier();
+    const scale = this.mapScaleManager.getScale();
+    const screenSize = this.screenSizeManager.getScreenSize();
+
+    if (direction === 'UP') {
+      const dx = ((scaleMultiplier - 1) / scaleMultiplier) * screenSize.x / 2;
+      const dy = ((scaleMultiplier - 1) / scaleMultiplier) * screenSize.y / 2;
+
+
+      this.offset.x -= scaleMultiplier * dx / (scale);
+      this.offset.y -= scaleMultiplier * dy / (scale);
+    } else {
+      //screenSize.x * (scaleMultiplier - 1)
+      const dx = screenSize.x * (scaleMultiplier - 1) / (2 * scaleMultiplier);
+      const dy = screenSize.y * (scaleMultiplier - 1) / (2 * scaleMultiplier);
+
+      console.log(dx, dy);
+
+      this.offset.x += dx / (scale);
+      this.offset.y += dy / (scale);
+    }
+
+    this.notifySubscribers();
+  };
 
   getMapOffset = () => ({ ...this.offset });
 }
