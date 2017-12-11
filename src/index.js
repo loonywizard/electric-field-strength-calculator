@@ -7,6 +7,9 @@ import ChargesCreator from './chargesCreator';
 import Canvas from './canvas';
 import ElectricFieldStrengthManager from './electricFieldStrengthManager';
 import MapOffsetManager from './mapOffsetManager';
+import ScaleManager from './scaleManager';
+
+const scaleManager = new ScaleManager();
 
 const screenSizeManager = new ScreenSizeManager();
 
@@ -14,18 +17,27 @@ const canvas = new Canvas(screenSizeManager);
 
 const dielectricConstantManager = new DielectricConstantManager();
 
-const mapOffsetManager = new MapOffsetManager(canvas.getDOMNode());
+const mapOffsetManager = new MapOffsetManager(canvas.getDOMNode(), scaleManager);
 
-const chargesManager = new ChargesManager(mapOffsetManager);
+const chargesManager = new ChargesManager(mapOffsetManager, scaleManager);
 
 const electricFieldStrengthManager = new ElectricFieldStrengthManager(
   chargesManager,
   dielectricConstantManager,
   canvas,
   mapOffsetManager,
+  scaleManager,
 );
 
 const chargesCreator = new ChargesCreator();
+
+scaleManager.subscribe(
+  chargesManager.updateChargesPositions,
+);
+
+scaleManager.subscribe(
+  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
+);
 
 mapOffsetManager.subscribe(chargesManager.updateChargesPositions);
 mapOffsetManager.subscribe(electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength);

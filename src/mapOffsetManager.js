@@ -1,7 +1,7 @@
 import Observer from './observer';
 
 export default class MapOffsetManager extends Observer {
-  constructor(canvasNode) {
+  constructor(canvasNode, mapScaleManager) {
     super();
 
     this.offset = {
@@ -30,13 +30,15 @@ export default class MapOffsetManager extends Observer {
           hasDraggingStarted = true;
         }
 
+        const mapScale = mapScaleManager.getScale();
+
         const currentMousePosition = {
           x: event.pageX,
           y: event.pageY,
         };
 
-        const mouseDx = currentMousePosition.x - lastMousePosition.x;
-        const mouseDy = currentMousePosition.y - lastMousePosition.y;
+        const mouseDx = mapScale ** -1 * (currentMousePosition.x - lastMousePosition.x);
+        const mouseDy = mapScale ** -1 * (currentMousePosition.y - lastMousePosition.y);
 
         this.offset.x += mouseDx;
         this.offset.y += mouseDy;

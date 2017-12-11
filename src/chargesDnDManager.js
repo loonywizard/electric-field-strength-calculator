@@ -2,10 +2,11 @@
  * ChargesDnDManager allows us to drag and drop charges, so we can change their positions
  * */
 export default class ChargesDnDManager {
-  constructor(charges, onChargeMove, getMapOffset) {
+  constructor(charges, onChargeMove, getMapOffset, getMapScale) {
     this.items = charges;
     this.onItemMove = onChargeMove;
     this.getMapOffset = getMapOffset;
+    this.getMapScale = getMapScale;
 
     this.isMouseDown = false;
     this.isDragging = false;
@@ -49,10 +50,12 @@ export default class ChargesDnDManager {
   handleStartDragging = (event) => {
     const node = this.draggingItem.getDOMNode();
 
+    const mapScale = this.getMapScale();
+
     node.classList.add('dragging');
 
-    this.mouseOffsetX = event.pageX - node.getBoundingClientRect().left;
-    this.mouseOffsetY = event.pageY - node.getBoundingClientRect().top;
+    this.mouseOffsetX = mapScale ** -1 * (event.pageX - node.getBoundingClientRect().left);
+    this.mouseOffsetY = mapScale ** -1 * (event.pageY - node.getBoundingClientRect().top);
   };
 
   handleStopDragging = () => {
@@ -83,10 +86,11 @@ export default class ChargesDnDManager {
     }
 
     const mapOffset = this.getMapOffset();
+    const mapScale = this.getMapScale();
 
     this.draggingItem.setPosition({
-      x: event.pageX - this.mouseOffsetX + 20 - mapOffset.x,
-      y: event.pageY - this.mouseOffsetY + 20 - mapOffset.y,
+      x: event.pageX / mapScale - this.mouseOffsetX + 20 / mapScale - mapOffset.x,
+      y: event.pageY / mapScale - this.mouseOffsetY + 20 / mapScale - mapOffset.y,
     });
   }
 }
