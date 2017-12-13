@@ -75,9 +75,9 @@ export default class ElectricCharge {
       const chargeInput = new ChargeInput({
         value: this.value,
         siPrefixName: this.siPrefixName,
-        onChargeInput: ({ value, siPrefixName }) => {
-          this.value = value;
-          this.siPrefixName = siPrefixName;
+        onChargeInput: ({ value: newValue, siPrefixName: newSiPrefixName }) => {
+          this.value = newValue;
+          this.siPrefixName = newSiPrefixName;
           this.displayChargeValue();
           this.onChargeInput();
         },
