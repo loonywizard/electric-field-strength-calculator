@@ -7,61 +7,75 @@ import ChargesCreator from './chargesCreator';
 import Canvas from './canvas';
 import ElectricFieldStrengthManager from './electricFieldStrengthManager';
 import MapOffsetManager from './mapOffsetManager';
-import ScaleManager from './scaleManager';
+import MapScaleManager from './mapScaleManager';
 import ScaleRuler from './scaleRuler';
 import MapGrid from './mapGrid';
 
-const scaleManager = new ScaleManager();
+const mapScaleManager = new MapScaleManager();
 
-const scaleRuler = new ScaleRuler(scaleManager);
+const scaleRuler = new ScaleRuler({ mapScaleManager });
 
 const screenSizeManager = new ScreenSizeManager();
 
-const canvas = new Canvas(screenSizeManager);
+const canvas = new Canvas({ screenSizeManager });
 
 const dielectricConstantManager = new DielectricConstantManager();
 
-const mapOffsetManager = new MapOffsetManager(canvas.getDOMNode(), scaleManager, screenSizeManager);
+const mapOffsetManager = new MapOffsetManager({
+  canvasNode: canvas.getDOMNode(),
+  mapScaleManager,
+  screenSizeManager,
+});
 
-const mapGrid = new MapGrid(canvas, mapOffsetManager, screenSizeManager, scaleManager);
+const mapGrid = new MapGrid(canvas, mapOffsetManager, screenSizeManager, mapScaleManager);
 
-const chargesManager = new ChargesManager(mapOffsetManager, scaleManager, screenSizeManager);
+const chargesManager = new ChargesManager(mapOffsetManager, mapScaleManager, screenSizeManager);
 
 const electricFieldStrengthManager = new ElectricFieldStrengthManager(
   chargesManager,
   dielectricConstantManager,
   canvas,
   mapOffsetManager,
-  scaleManager,
+  mapScaleManager,
 );
 
 const chargesCreator = new ChargesCreator();
 
-scaleManager.subscribe(
+mapScaleManager.subscribe(
   chargesManager.updateChargesPositions,
   mapOffsetManager.onMapScale,
-  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
   scaleRuler.setScaleValue,
+  canvas.clear,
   mapGrid.visualise,
+  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
 );
 
 mapOffsetManager.subscribe(
   chargesManager.updateChargesPositions,
-  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
+  canvas.clear,
   mapGrid.visualise,
+  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
 );
 
 chargesCreator.subscribe(chargesManager.addCharge);
 
 chargesManager.subscribe(
-  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
+  canvas.clear,
   mapGrid.visualise,
+  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
+);
+
+screenSizeManager.subscribe(
+  canvas.onScreenSizeChange,
+  canvas.clear,
+  mapGrid.visualise,
+  electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
 );
 
 dielectricConstantManager.subscribe(
   electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength,
 );
 
-electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength();
-
 mapGrid.visualise();
+
+electricFieldStrengthManager.calculateAndDisplayElectricFieldStrength();

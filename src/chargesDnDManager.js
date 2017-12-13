@@ -1,8 +1,22 @@
 /**
+ * ChargesDnDManager
+ *
  * ChargesDnDManager allows us to drag and drop charges, so we can change their positions
+ *
+ * @param {Array} args.charges
+ * @param {Function} args.onChargeMove,
+ * @param {Function} args.getMapOffset
+ * @param {Function} getMapScale
+ *
+ * @function addItem - ChargesManager calls this function,
+ *   when it wants to make new charge 'draggable'
  * */
 export default class ChargesDnDManager {
-  constructor(charges, onChargeMove, getMapOffset, getMapScale) {
+  constructor(args) {
+    const {
+      charges, onChargeMove, getMapOffset, getMapScale,
+    } = args;
+
     this.items = charges;
     this.onItemMove = onChargeMove;
     this.getMapOffset = getMapOffset;

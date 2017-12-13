@@ -3,13 +3,13 @@ import ElectricCharge from './electricCharge';
 import ChargesDnDManager from './chargesDnDManager';
 
 export default class ChargesManager extends Observer {
-  constructor(mapOffsetManager, scaleManager, screenSizeManager) {
+  constructor(mapOffsetManager, mapScaleManager, screenSizeManager) {
     super();
 
     this.container = document.getElementById('charges-container');
     this.onChargesChange = this.notifySubscribers;
     this.mapOffsetManager = mapOffsetManager;
-    this.getMapScale = scaleManager.getScale;
+    this.getMapScale = mapScaleManager.getScale;
     this.getScreenSize = screenSizeManager.getScreenSize;
 
     this.charges = [
@@ -35,12 +35,12 @@ export default class ChargesManager extends Observer {
       getMapScale: this.getMapScale,
     });
 
-    this.chargesDnDManager = new ChargesDnDManager(
-      [...this.charges, this.testCharge],
-      this.onChargesChange,
-      mapOffsetManager.getMapOffset,
-      this.getMapScale,
-    );
+    this.chargesDnDManager = new ChargesDnDManager({
+      charges: [...this.charges, this.testCharge],
+      onChargeMove: this.onChargesChange,
+      getMapOffset: mapOffsetManager.getMapOffset,
+      getMapScale: this.getMapScale,
+    });
   }
 
   updateChargesPositions = () => {

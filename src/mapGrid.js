@@ -14,6 +14,11 @@ export default class MapGrid {
     const screenSize = this.screenSizeManager.getScreenSize();
     const scale = this.mapScaleManager.getScale();
 
+    ctx.save();
+
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = '#b7b7b7';
+
     for (let i = 0; i < screenSize.y / this.gridStep; i += 1) {
       ctx.beginPath();
       ctx.moveTo(0, i * this.gridStep + scale * mapOffset.y % this.gridStep);
@@ -27,5 +32,7 @@ export default class MapGrid {
       ctx.lineTo(i * this.gridStep + scale * mapOffset.x % this.gridStep, screenSize.y);
       ctx.stroke();
     }
+
+    ctx.restore();
   }
 }

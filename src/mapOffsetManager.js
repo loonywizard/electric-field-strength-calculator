@@ -1,13 +1,36 @@
 import Observer from './observer';
 import { SCALING_DIRECTIONS } from './consts';
 
+/**
+ * MapOffsetManager
+ *
+ * MapOffsetManager manages map offset in application
+ * With mouse dragging user can scroll map
+ *
+ * @args {CanvasNode} args.canvasNode
+ * @args {MapScaleManager} args.mapScaleManager
+ * @args {ScreenSizeManager} args.screenSizeManager
+ *
+ * @method onMapScale
+ * @function getMapOffset
+ * */
 export default class MapOffsetManager extends Observer {
-  constructor(canvasNode, mapScaleManager, screenSizeManager) {
+  constructor(args) {
     super();
+
+    const { canvasNode, mapScaleManager, screenSizeManager } = args;
 
     this.mapScaleManager = mapScaleManager;
     this.screenSizeManager = screenSizeManager;
 
+    /*
+    * Offset by axis X is distance in meters between current left top angle of window
+    * and initial left top angle of window
+    *
+    * Because we store offset in meters, we should divide diff in mouse positions by map scale,
+    * See MapScaleManager for understanding what map scale is, in a few words:
+    * 1 / scale meters = 1 pixel
+    * */
     this.offset = {
       x: 0,
       y: 0,
@@ -41,8 +64,8 @@ export default class MapOffsetManager extends Observer {
           y: event.pageY,
         };
 
-        const mouseDx = mapScale ** -1 * (currentMousePosition.x - lastMousePosition.x);
-        const mouseDy = mapScale ** -1 * (currentMousePosition.y - lastMousePosition.y);
+        const mouseDx = (currentMousePosition.x - lastMousePosition.x) / mapScale;
+        const mouseDy = (currentMousePosition.y - lastMousePosition.y) / mapScale;
 
         this.offset.x += mouseDx;
         this.offset.y += mouseDy;
@@ -64,23 +87,27 @@ export default class MapOffsetManager extends Observer {
     });
   }
 
+  /*
+  * When we scale the map, it's important to scale relative to center of current screen,
+  * so when we scale up or scale down the map, we should recalculate map offset
+  * */
   onMapScale = (direction) => {
     const scaleMultiplier = this.mapScaleManager.getScaleMultiplier();
     const scale = this.mapScaleManager.getScale();
     const screenSize = this.screenSizeManager.getScreenSize();
 
     if (direction === SCALING_DIRECTIONS.UP) {
-      const dx = ((scaleMultiplier - 1) / scaleMultiplier) * screenSize.x / 2;
-      const dy = ((scaleMultiplier - 1) / scaleMultiplier) * screenSize.y / 2;
+      const dx = screenSize.x * (scaleMultiplier - 1) / 2;
+      const dy = screenSize.y * (scaleMultiplier - 1) / 2;
 
-      this.offset.x -= scaleMultiplier * dx / (scale);
-      this.offset.y -= scaleMultiplier * dy / (scale);
+      this.offset.x -= dx / scale;
+      this.offset.y -= dy / scale;
     } else if (direction === SCALING_DIRECTIONS.DOWN) {
       const dx = screenSize.x * (scaleMultiplier - 1) / (2 * scaleMultiplier);
       const dy = screenSize.y * (scaleMultiplier - 1) / (2 * scaleMultiplier);
 
-      this.offset.x += dx / (scale);
-      this.offset.y += dy / (scale);
+      this.offset.x += dx / scale;
+      this.offset.y += dy / scale;
     }
 
     this.notifySubscribers();

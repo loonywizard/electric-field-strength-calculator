@@ -32,7 +32,6 @@ export default class ElectricFieldStrengthManager {
 
   calculateAndDisplayElectricFieldStrength = () => {
     const { efs, angle } = this.electricFieldStrengthCalculator.calculate();
-    this.canvas.clear();
     this.electricFieldStrengthVectorVisualiser.visualise(
       this.chargesManager.getTestCharge().getPosition(),
       angle,

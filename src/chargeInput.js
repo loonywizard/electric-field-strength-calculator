@@ -2,17 +2,19 @@ import Dropdown from './dropdown';
 import { SI_PREFIXES } from './consts';
 
 /**
+ * ChargeInput class
+ *
  * ChargeInput allows user to change charge value: it's number and si prefix
  *
- * ChargeInput looks like that:
- * <div class="charge-input>
- *   <input> - input for a number
- *   <div class=dropdown"></div> - dropdown for si prefixes
- * </div>
+ * @param {Function} args.onChargeInput
+ *
+ * @function render - returns DOM Node of charge input
  * */
 export default class ChargeInput {
   constructor(args) {
     const { onChargeInput } = args;
+
+    this.onChargeInput = onChargeInput;
 
     this.value = args.value;
     this.siPrefixName = args.siPrefixName;
@@ -29,10 +31,7 @@ export default class ChargeInput {
     const onDropdownSelect = (siPrefixName) => {
       this.siPrefixName = siPrefixName;
 
-      onChargeInput({
-        value: this.value,
-        siPrefixName: this.siPrefixName,
-      });
+      this.handleChargeInput();
     };
 
     const dropdown = new Dropdown({
@@ -44,15 +43,19 @@ export default class ChargeInput {
     input.addEventListener('input', () => {
       this.value = input.value;
 
-      onChargeInput({
-        value: this.value,
-        siPrefixName: this.siPrefixName,
-      });
+      this.handleChargeInput();
     });
 
     this.node.appendChild(input);
     this.node.appendChild(dropdown.render());
   }
+
+  handleChargeInput = () => {
+    this.onChargeInput({
+      value: this.value,
+      siPrefixName: this.siPrefixName,
+    });
+  };
 
   render = () => this.node;
 }

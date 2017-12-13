@@ -1,14 +1,23 @@
 /**
- * Canvas object can clear it's rect and share it's ctx object
+ * Canvas class
+ *
+ * @param {ScreenSizeManager} args.screenSizeManager
+ *
+ * @method onScreenSizeChange - changes width and height properties of DON Node
+ * @method clear              - clears canvas
+ *
+ * @function getCtx           - returns ctx object
+ * @function getDOMNode       - returns DOM Node
  * */
 export default class Canvas {
-  constructor(screenSizeManager) {
+  constructor(args) {
+    const { screenSizeManager } = args;
+
     this.canvas = document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
     this.screenSizeManager = screenSizeManager;
 
     this.onScreenSizeChange(); // init screen size
-    screenSizeManager.subscribe(this.onScreenSizeChange);
   }
 
   onScreenSizeChange = () => {
