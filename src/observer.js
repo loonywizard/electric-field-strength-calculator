@@ -8,6 +8,9 @@
  *
  * Observer has method 'subscribe', that adds new functions to subscribers array
  * Observer has method 'notifySubscribers', that calls all subscribers
+ *
+ * @method subscribe
+ * @method notifySubscribers
  * */
 export default class Observer {
   constructor() {
