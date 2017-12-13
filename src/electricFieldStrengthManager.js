@@ -42,7 +42,7 @@ export default class ElectricFieldStrengthManager {
     this.electricFieldStrengthVectorVisualiser = new ElectricFieldStrengthVectorVisualiser({
       ctx,
       getMapOffset: mapOffsetManager.getMapOffset,
-      getMapScale: mapScaleManager.getScale,
+      getMapScale: mapScaleManager.getMapScale,
     });
   }
 

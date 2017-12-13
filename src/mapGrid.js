@@ -28,7 +28,7 @@ export default class MapGrid {
     const mapOffset = this.mapOffsetManager.getMapOffset();
     const ctx = this.canvas.getCtx();
     const screenSize = this.screenSizeManager.getScreenSize();
-    const scale = this.mapScaleManager.getScale();
+    const scale = this.mapScaleManager.getMapScale();
 
     ctx.save();
 

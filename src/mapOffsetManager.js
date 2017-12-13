@@ -61,7 +61,7 @@ export default class MapOffsetManager extends Observer {
           hasDraggingStarted = true;
         }
 
-        const mapScale = mapScaleManager.getScale();
+        const mapScale = mapScaleManager.getMapScale();
 
         const currentMousePosition = {
           x: event.pageX,
@@ -97,7 +97,7 @@ export default class MapOffsetManager extends Observer {
   * */
   onMapScale = (direction) => {
     const scaleMultiplier = this.mapScaleManager.getScaleMultiplier();
-    const scale = this.mapScaleManager.getScale();
+    const scale = this.mapScaleManager.getMapScale();
     const screenSize = this.screenSizeManager.getScreenSize();
 
     if (direction === SCALING_DIRECTIONS.UP) {

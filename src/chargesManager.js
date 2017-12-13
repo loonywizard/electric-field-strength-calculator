@@ -29,7 +29,7 @@ export default class ChargesManager extends Observer {
     this.container = document.getElementById('charges-container');
     this.onChargesChange = this.notifySubscribers;
     this.mapOffsetManager = mapOffsetManager;
-    this.getMapScale = mapScaleManager.getScale;
+    this.getMapScale = mapScaleManager.getMapScale;
     this.getScreenSize = screenSizeManager.getScreenSize;
 
     this.charges = [
