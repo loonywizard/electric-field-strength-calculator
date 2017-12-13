@@ -27,7 +27,12 @@ const mapOffsetManager = new MapOffsetManager({
   screenSizeManager,
 });
 
-const mapGrid = new MapGrid(canvas, mapOffsetManager, screenSizeManager, mapScaleManager);
+const mapGrid = new MapGrid({
+  canvas,
+  mapOffsetManager,
+  screenSizeManager,
+  mapScaleManager,
+});
 
 const chargesManager = new ChargesManager(mapOffsetManager, mapScaleManager, screenSizeManager);
 

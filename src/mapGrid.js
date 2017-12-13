@@ -1,5 +1,21 @@
+/**
+ * MapGrid
+ *
+ * MapGrid instance can draw a grid behind the charges, so user can see distances between charges
+ *
+ * @param {Canvas} args.canvas
+ * @param {MapOffsetManager} args.mapOffsetManager
+ * @param {ScreenSizeManager} args.screenSizeManager
+ * @param {MapScaleManager} args.mapScaleManager
+ *
+ * @method visualise
+ * */
 export default class MapGrid {
-  constructor(canvas, mapOffsetManager, screenSizeManager, mapScaleManager) {
+  constructor(args) {
+    const {
+      canvas, mapOffsetManager, screenSizeManager, mapScaleManager,
+    } = args;
+
     this.canvas = canvas;
     this.mapOffsetManager = mapOffsetManager;
     this.screenSizeManager = screenSizeManager;
