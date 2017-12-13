@@ -7,21 +7,25 @@ import { SCALING_DIRECTIONS } from './consts';
  * MapOffsetManager manages map offset in application
  * With mouse dragging user can scroll map
  *
- * @args {CanvasNode} args.canvasNode
+ * @args {Canvas} args.canvas
  * @args {MapScaleManager} args.mapScaleManager
  * @args {ScreenSizeManager} args.screenSizeManager
  *
  * @method onMapScale
  * @function getMapOffset
+ *
+ * @extends Observer
  * */
 export default class MapOffsetManager extends Observer {
   constructor(args) {
     super();
 
-    const { canvasNode, mapScaleManager, screenSizeManager } = args;
+    const { canvas, mapScaleManager, screenSizeManager } = args;
 
     this.mapScaleManager = mapScaleManager;
     this.screenSizeManager = screenSizeManager;
+
+    const canvasNode = canvas.getDOMNode();
 
     /*
     * Offset by axis X is distance in meters between current left top angle of window

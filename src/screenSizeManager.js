@@ -1,6 +1,8 @@
 import Observer from './observer';
 
 /**
+ * ScreenSizeManager
+ *
  * ScreenSizeManager allows us to detect changes of the screen size
  *
  * screenSize is the size of web page in pixels

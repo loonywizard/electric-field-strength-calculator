@@ -1,18 +1,26 @@
-/*
-* ElectricFieldStrengthCalculator calculates Electric Field Strength
-*
-* Electric Field Strength from one charge to another is k * q / r ** 2,
-* where q - charge, r - distance between charge and test charge, k = 9 * 10 ** 9
-*
-* Electric Field Strength of all field is sum of all vectors of efs
-* */
-
 import { SI_PREFIXES } from './consts';
 
 const k = 9 * 10 ** 9;
 
+/**
+ * ElectricFieldStrengthCalculator
+ *
+ * ElectricFieldStrengthCalculator calculates Electric Field Strength
+ *
+ * Electric Field Strength from one charge to another is k * q / r ** 2,
+ * where q - charge, r - distance between charge and test charge, k = 9 * 10 ** 9
+ *
+ * Electric Field Strength of all field is sum of all vectors of efs
+ *
+ * @param {ChargesManager} args.chargesManager
+ * @param {DielectricConstantManager} args.dielectricConstantManager
+ *
+ * @function calculate - returns electric field strength value and it's vector angle
+ * */
 export default class ElectricFieldStrengthCalculator {
-  constructor(chargesManager, dielectricConstantManager) {
+  constructor(args) {
+    const { chargesManager, dielectricConstantManager } = args;
+
     this.chargesManager = chargesManager;
     this.dielectricConstantManager = dielectricConstantManager;
   }

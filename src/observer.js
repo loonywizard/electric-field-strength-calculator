@@ -1,4 +1,6 @@
 /**
+ * Observer
+ *
  * This is basic implementation of Observer pattern, also known as observer/publisher pattern
  *
  * Observer has array of subscribers, that consists of functions, that we need to call

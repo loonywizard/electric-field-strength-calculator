@@ -1,14 +1,30 @@
 import ElectricFieldStrengthCalculator from './electricFieldStrengthCalculator';
 import ElectricFieldStrengthVectorVisualiser from './electricFieldStrengthVectorVisualiser';
 
+/**
+ * ElectricFieldStrengthManager
+ *
+ * ElectricFieldStrengthManager is responsible for calculating and visualising
+ * a value of electric field strength
+ *
+ * @param {ChargesManager} args.chargesManager
+ * @param {DielectricConstantManager} args.dielectricConstantManager
+ * @param {Canvas} args.canvas
+ * @param {MapOffsetManager} args.mapOffsetManager
+ * @param {MapScaleManager} args.mapScaleManager
+ *
+ * @method calculateAndDisplayElectricFieldStrength
+ * */
 export default class ElectricFieldStrengthManager {
-  constructor(
-    chargesManager,
-    dielectricConstantManager,
-    canvas,
-    mapOffsetManager,
-    mapScaleManager,
-  ) {
+  constructor(args) {
+    const {
+      chargesManager,
+      dielectricConstantManager,
+      canvas,
+      mapOffsetManager,
+      mapScaleManager,
+    } = args;
+
     const ctx = canvas.getCtx();
 
     this.canvas = canvas;
@@ -19,15 +35,15 @@ export default class ElectricFieldStrengthManager {
     this.efsDisplay = chargesManager.getTestCharge().getElectricFieldStrengthDisplayNode();
     this.chargesManager = chargesManager;
 
-    this.electricFieldStrengthCalculator = new ElectricFieldStrengthCalculator(
+    this.electricFieldStrengthCalculator = new ElectricFieldStrengthCalculator({
       chargesManager,
       dielectricConstantManager,
-    );
-    this.electricFieldStrengthVectorVisualiser = new ElectricFieldStrengthVectorVisualiser(
+    });
+    this.electricFieldStrengthVectorVisualiser = new ElectricFieldStrengthVectorVisualiser({
       ctx,
-      mapOffsetManager.getMapOffset,
-      mapScaleManager.getScale,
-    );
+      getMapOffset: mapOffsetManager.getMapOffset,
+      getMapScale: mapScaleManager.getScale,
+    });
   }
 
   calculateAndDisplayElectricFieldStrength = () => {

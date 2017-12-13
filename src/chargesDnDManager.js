@@ -29,6 +29,8 @@ export default class ChargesDnDManager {
     this.mouseOffsetY = null;
     this.hasDraggingStarted = false;
 
+    this.chargeRadius = 20;
+
     this.items.forEach((item) => {
       this.addMouseDownListenerToItem(item);
     });
@@ -68,8 +70,8 @@ export default class ChargesDnDManager {
 
     node.classList.add('dragging');
 
-    this.mouseOffsetX = mapScale ** -1 * (event.pageX - node.getBoundingClientRect().left);
-    this.mouseOffsetY = mapScale ** -1 * (event.pageY - node.getBoundingClientRect().top);
+    this.mouseOffsetX = (event.pageX - node.getBoundingClientRect().left) / mapScale;
+    this.mouseOffsetY = (event.pageY - node.getBoundingClientRect().top) / mapScale;
   };
 
   handleStopDragging = () => {
@@ -103,8 +105,8 @@ export default class ChargesDnDManager {
     const mapScale = this.getMapScale();
 
     this.draggingItem.setPosition({
-      x: event.pageX / mapScale - this.mouseOffsetX + 20 / mapScale - mapOffset.x,
-      y: event.pageY / mapScale - this.mouseOffsetY + 20 / mapScale - mapOffset.y,
+      x: (event.pageX + this.chargeRadius) / mapScale - this.mouseOffsetX - mapOffset.x,
+      y: (event.pageY + this.chargeRadius) / mapScale - this.mouseOffsetY - mapOffset.y,
     });
   }
 }

@@ -2,16 +2,45 @@ import ChargeInput from './chargeInput';
 import { SI_PREFIXES } from './consts';
 import closeSvgIcon from './resources/close-icon.svg';
 
+/**
+ * ElectricCharge
+ *
+ * @param {Boolean} args.isTest
+ * @param {DOMNode} args.parentDOMNode
+ * @param {Function} args.onChargeInput
+ * @param {Number} args.value
+ * @param {String} args.siPrefixName
+ * @param {Object} args.position
+ * @param {Function} args.getMapOffset
+ * @param {Function} args.getMapScale
+ *
+ * @function setPosition
+ *
+ * @function getPosition
+ * @function getCharge
+ * @function getDOMNode
+ * */
 export default class ElectricCharge {
   constructor(args) {
-    this.isTest = args.isTest;
-    this.parentDOMNode = args.parentDOMNode;
-    this.onChargeInput = args.onChargeInput;
-    this.value = args.value;
-    this.siPrefixName = args.siPrefixName;
-    this.position = args.position;
-    this.getMapOffset = args.getMapOffset;
-    this.getMapScale = args.getMapScale;
+    const {
+      isTest,
+      parentDOMNode,
+      onChargeInput,
+      value,
+      siPrefixName,
+      position,
+      getMapOffset,
+      getMapScale,
+    } = args;
+
+    this.isTest = isTest;
+    this.parentDOMNode = parentDOMNode;
+    this.onChargeInput = onChargeInput;
+    this.value = value;
+    this.siPrefixName = siPrefixName;
+    this.position = position;
+    this.getMapOffset = getMapOffset;
+    this.getMapScale = getMapScale;
 
     this.node = document.createElement('div');
     this.node.className = `charge${this.isTest ? ' test-charge' : ''}`;

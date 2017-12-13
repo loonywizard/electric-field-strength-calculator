@@ -1,10 +1,20 @@
 import { drawArrow } from './canvasShapes';
 
 /**
+ * ElectricFieldStrengthVectorVisualiser
+ *
  * ElectricFieldStrengthVectorVisualiser is responsible for drawing a vector of EFS
+ *
+ * @param {CanvasCtx} args.ctx
+ * @param {Function} args.getMapOffset
+ * @param {Function} args.getMapScale
+ *
+ * @method visualise
  * */
 export default class ElectricFieldStrengthVectorVisualiser {
-  constructor(ctx, getMapOffset, getMapScale) {
+  constructor(args) {
+    const { ctx, getMapOffset, getMapScale } = args;
+
     this.ctx = ctx;
     this.getMapOffset = getMapOffset;
     this.getMapScale = getMapScale;

@@ -14,10 +14,10 @@ import plusSvgIcon from './resources/plus.svg';
  * And with scaling up, we have (1 / scale) meters in one pixel,
  * after scaling down we returns to initial situation with one meter to one pixel
  *
- * @extends Observer
- *
  * @function getScale - returns current scale of map
  * @function getScaleMultiplier - returns scale multiplier
+ *
+ * @extends Observer
  * */
 export default class MapScaleManager extends Observer {
   constructor() {

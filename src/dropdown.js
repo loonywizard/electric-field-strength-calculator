@@ -1,9 +1,14 @@
 /**
- * This class implements simple Dropdown list
+ * Dropdown
+ *
+ * Dropdown create and manage html dropdown component,
+ * whit which users can choose different options from dropdown list
  *
  * @param {String} selectedItemId
  * @param {Object} items - object of pairs: itemId: { ..., name, ... }
  * @param {Function} onItemSelect
+ *
+ * @function render - returns DOM Node of dropdown
  * */
 export default class Dropdown {
   constructor(args) {

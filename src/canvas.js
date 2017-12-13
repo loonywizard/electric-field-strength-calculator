@@ -1,5 +1,5 @@
 /**
- * Canvas class
+ * Canvas
  *
  * @param {ScreenSizeManager} args.screenSizeManager
  *

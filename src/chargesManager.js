@@ -2,9 +2,29 @@ import Observer from './observer';
 import ElectricCharge from './electricCharge';
 import ChargesDnDManager from './chargesDnDManager';
 
+/**
+ * ChargesManager
+ *
+ * ChargesManager manages all charges, it can change their positions, add new charges,
+ * it can give charges array
+ *
+ * @param {MapOffsetManager} args.mapOffsetManager
+ * @param {MapScaleManager} args.mapScaleManager
+ * @param {ScreenSizeManager} args.screenSizeManager
+ *
+ * @method updateChargesPositions
+ * @method addCharge
+ *
+ * @function getCharges
+ * @function getTestCharge
+ *
+ * @extends Observer
+ * */
 export default class ChargesManager extends Observer {
-  constructor(mapOffsetManager, mapScaleManager, screenSizeManager) {
+  constructor(args) {
     super();
+
+    const { mapOffsetManager, mapScaleManager, screenSizeManager } = args;
 
     this.container = document.getElementById('charges-container');
     this.onChargesChange = this.notifySubscribers;

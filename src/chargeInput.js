@@ -2,7 +2,7 @@ import Dropdown from './dropdown';
 import { SI_PREFIXES } from './consts';
 
 /**
- * ChargeInput class
+ * ChargeInput
  *
  * ChargeInput allows user to change charge value: it's number and si prefix
  *
