@@ -47,13 +47,6 @@ export default class ElectricCharge {
 
     this.setNodePosition();
 
-    this.node.addEventListener('click', () => {
-      const hasDragged = this.node.getAttribute('has-dragged');
-      if (hasDragged !== null) {
-        this.node.removeAttribute('has-dragged');
-      }
-    });
-
     if (this.isTest) {
       this.electricFieldStrengthDisplayNode = document.createElement('div');
       this.electricFieldStrengthDisplayNode.classList.add('efs-display');
@@ -84,9 +77,14 @@ export default class ElectricCharge {
       });
 
       this.chargeDisplayNode.addEventListener('click', () => {
-        this.chargeDisplayNode.classList.add('hidden');
-        editChargeContainer.classList.remove('hidden');
-        this.node.classList.add('charge-editing');
+        const hasDragged = this.node.getAttribute('has-dragged');
+        if (hasDragged !== null) {
+          this.node.removeAttribute('has-dragged');
+        } else {
+          this.chargeDisplayNode.classList.add('hidden');
+          editChargeContainer.classList.remove('hidden');
+          this.node.classList.add('charge-editing');
+        }
       });
 
       closeIconContainer.addEventListener('click', () => {
