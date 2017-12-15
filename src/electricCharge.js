@@ -1,6 +1,7 @@
 import ChargeInput from './chargeInput';
 import { SI_PREFIXES } from './consts';
 import closeSvgIcon from './resources/close-icon.svg';
+import formatNumber from './formatters';
 
 /**
  * ElectricCharge
@@ -107,7 +108,8 @@ export default class ElectricCharge {
 
   displayChargeValue = () => {
     const q = this.value * SI_PREFIXES[this.siPrefixName].value;
-    this.chargeDisplayNode.innerHTML = `Q = ${q.toExponential(5)} C`;
+    const { formattedNumber, prefixName } = formatNumber(q);
+    this.chargeDisplayNode.innerHTML = `Q = ${formattedNumber} ${prefixName}C`;
   };
 
   setNodePosition = () => {
