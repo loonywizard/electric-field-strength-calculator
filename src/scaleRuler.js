@@ -1,3 +1,5 @@
+import formatNumber from './formatters';
+
 /**
  * ScaleRuler
  *
@@ -21,6 +23,8 @@ export default class ScaleRuler {
   setScaleValue = () => {
     const mapScale = this.mapScaleManager.getMapScale();
 
-    this.scaleValueNode.innerHTML = `${(1 / mapScale * this.rulerLength).toExponential(2)}m`;
+    const { formattedNumber, prefixName } = formatNumber(1 / mapScale * this.rulerLength);
+
+    this.scaleValueNode.innerHTML = `${formattedNumber} ${prefixName}m`;
   };
 }

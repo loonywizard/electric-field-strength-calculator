@@ -1,5 +1,6 @@
 import ElectricFieldStrengthCalculator from './electricFieldStrengthCalculator';
 import ElectricFieldStrengthVectorVisualiser from './electricFieldStrengthVectorVisualiser';
+import formatNumber from './formatters';
 
 /**
  * ElectricFieldStrengthManager
@@ -52,6 +53,9 @@ export default class ElectricFieldStrengthManager {
       this.chargesManager.getTestCharge().getPosition(),
       angle,
     );
-    this.efsDisplay.innerHTML = `E = ${efs.toExponential(5)} v/m`;
+
+    const { formattedNumber, prefixName } = formatNumber(efs);
+
+    this.efsDisplay.innerHTML = `E = ${formattedNumber} ${prefixName}v/m`;
   }
 }
