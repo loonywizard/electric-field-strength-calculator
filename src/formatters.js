@@ -18,17 +18,30 @@ const PREFIXES = [
   { value: 10 ** -24, name: 'y' },
 ];
 
+/**
+ * This function formats numbers, so it's easier to read them for user
+ * for example, number 14250 will be formatted to 14.250 k
+ * number 0.45 will be formatted to 450 m
+ *
+ * @param {Number} number
+ *
+ * @typedef {Object} FormattedNumber
+ * @property {String} prefixName
+ * @property {Number} formattedNumber
+ *
+ * @return {FormattedNumber}
+ * */
 export default function formatNumber(number) {
   let prefixName = null;
   let formattedNumber = null;
-  for (let i = 0; i < PREFIXES.length; i+= 1) {
+  for (let i = 0; i < PREFIXES.length; i += 1) {
     const { value, name } = PREFIXES[i];
     if (number >= value) {
       prefixName = name;
       formattedNumber = Math.round((number / value) * 1000) / 1000;
       break;
     }
-  };
+  }
 
   return {
     prefixName,
